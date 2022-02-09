@@ -13,20 +13,20 @@ class Notifications extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Notifications"),
+        title: const Text("Notifikasi"),
         backgroundColor: Colors.blue,
       ),
       body: Column(
         children: <Widget>[
           NotificationContent(
             dateFormated: dateFormated,
-            notificationTitle: "Withdrawal Success",
+            notificationTitle: "Penarikan Dana Berhasil",
             notificationContent:
                 "Penarikan tunai dari rekening 0100063001 sebesar Rp 150.000 telah berhasil.",
           ),
           NotificationContent(
             dateFormated: dateFormated,
-            notificationTitle: "Transfer Balance Success",
+            notificationTitle: "Kirim Saldo Berhasil",
             notificationContent:
                 "Pemindahan dana ke Windy Sura Wijaya - 0100062901 sebesar Rp 125.000 telah berhasil.",
           ),

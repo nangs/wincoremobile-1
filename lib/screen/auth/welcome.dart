@@ -23,7 +23,7 @@ class Welcome extends StatelessWidget {
                 width: double.infinity,
               ),
               const Text(
-                "Welcome Back,",
+                "Selamat Datang,",
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
@@ -31,7 +31,7 @@ class Welcome extends StatelessWidget {
                 ),
               ),
               const Text(
-                "Let's get started to WINCore Mobile !",
+                "Mulai hari mu dengan WINCore Mobile !",
                 style: TextStyle(
                   fontSize: 12,
                   color: Colors.white60,
@@ -65,7 +65,7 @@ class Welcome extends StatelessWidget {
                               borderRadius: BorderRadius.circular(24)))),
                   child: const Padding(
                     padding: EdgeInsets.all(14),
-                    child: Text("Create Mobile Account"),
+                    child: Text("Buat Akun Baru"),
                   ),
                 ),
               ),
@@ -76,7 +76,7 @@ class Welcome extends StatelessWidget {
                     child: Container(
                       alignment: Alignment.center,
                       child: const Text(
-                        "Or",
+                        "Atau",
                         style: TextStyle(color: Colors.white54),
                       ),
                     ),
@@ -99,7 +99,7 @@ class Welcome extends StatelessWidget {
                               borderRadius: BorderRadius.circular(24)))),
                   child: const Padding(
                     padding: EdgeInsets.all(14),
-                    child: Text("Login"),
+                    child: Text("Masuk"),
                   ),
                 ),
               ),

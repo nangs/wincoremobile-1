@@ -27,7 +27,7 @@ class _ForgotMPinState extends State<ForgotMPin> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: const Text('Forgot MPIN'),
+        title: const Text('Lupa M-PIN'),
         // backgroundColor: Colors.lightBlue,
       ),
       body: SafeArea(
@@ -41,7 +41,7 @@ class _ForgotMPinState extends State<ForgotMPin> {
                   controller: myPhoneNumberController,
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
-                    labelText: 'Phone Number',
+                    labelText: 'Nomor Telepon',
                   ),
                   onChanged: (text) {
                     nPhoneNumber = text;
@@ -54,7 +54,7 @@ class _ForgotMPinState extends State<ForgotMPin> {
                   controller: myAccountNumberController,
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
-                    labelText: 'Account Number',
+                    labelText: 'Nomor Telepom',
                   ),
                   onChanged: (text) {
                     nAccountNumber = text;
@@ -68,7 +68,7 @@ class _ForgotMPinState extends State<ForgotMPin> {
                   controller: myNewMPINController,
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
-                    labelText: 'New MPIN',
+                    labelText: 'M-PIN Baru',
                   ),
                   onChanged: (text) {
                     nNewMPIN = text;
@@ -82,7 +82,7 @@ class _ForgotMPinState extends State<ForgotMPin> {
                   controller: myRetypeNewMPINController,
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
-                    labelText: 'Retype New MPIN',
+                    labelText: 'Ketikan Ulang M-PIN Baru',
                   ),
                   onChanged: (text) {
                     nRetypeNewMPIN = text;
@@ -102,7 +102,7 @@ class _ForgotMPinState extends State<ForgotMPin> {
                     MaterialPageRoute(builder: (context) => const Welcome()));
               },
               child: const Text(
-                'Submit',
+                'Kirim',
                 style: TextStyle(fontSize: 30.0),
               ),
             )

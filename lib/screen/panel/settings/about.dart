@@ -12,7 +12,7 @@ class _AboutState extends State<About> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("About"),
+        title: const Text("Tentang Kami"),
         backgroundColor: Colors.blue,
       ),
     );

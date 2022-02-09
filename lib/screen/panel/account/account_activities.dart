@@ -12,7 +12,7 @@ class _AccountActivitiesState extends State<AccountActivities> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Saving Account Activities"),
+        title: const Text("Mutasi Saldo"),
         backgroundColor: Colors.blue,
       ),
     );

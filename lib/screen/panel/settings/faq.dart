@@ -12,7 +12,7 @@ class _FAQState extends State<FAQ> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Frequently Ask Question"),
+        title: const Text("Pertanyaan dan Dukungan"),
         backgroundColor: Colors.blue,
       ),
     );

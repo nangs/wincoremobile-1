@@ -53,14 +53,14 @@ class _HomeState extends State<Home> {
             ),
             ListTile(
               leading: const Icon(Icons.account_circle),
-              title: const Text('Profile'),
+              title: const Text('Profil'),
               onTap: () => {
                 Navigator.pop(context),
               },
             ),
             ListTile(
               leading: const Icon(Icons.message),
-              title: const Text('FAQ'),
+              title: const Text('Pertanyaan dan Dukungan'),
               onTap: () => {
                 // Navigator.pop(context),
                 Navigator.of(context).push(MaterialPageRoute(
@@ -70,7 +70,7 @@ class _HomeState extends State<Home> {
             ),
             ListTile(
               leading: const Icon(Icons.message),
-              title: const Text('About'),
+              title: const Text('Tentang Kami'),
               onTap: () => {
                 // Navigator.pop(context),
                 Navigator.of(context).push(MaterialPageRoute(
@@ -80,7 +80,7 @@ class _HomeState extends State<Home> {
             ),
             ListTile(
               leading: const Icon(Icons.settings),
-              title: const Text('Settings'),
+              title: const Text('Pengaturan'),
               onTap: () => {
                 Navigator.of(context).push(
                     MaterialPageRoute(builder: (context) => const Settings())),
@@ -133,7 +133,7 @@ class _HomeState extends State<Home> {
                           },
                           child: const IconWithLabel(
                               icon: Icons.attach_money,
-                              text: "Balance Inquiry",
+                              text: "Informasi Saldo",
                               iconColor: Colors.white,
                               textColor: Colors.white),
                         ),
@@ -168,7 +168,7 @@ class _HomeState extends State<Home> {
                           },
                           child: const IconWithLabel(
                               icon: Icons.list_alt_sharp,
-                              text: "Saving Account Activities",
+                              text: "Mutasi Saldo",
                               iconColor: Colors.white,
                               textColor: Colors.white),
                         ),
@@ -203,7 +203,7 @@ class _HomeState extends State<Home> {
                           },
                           child: const IconWithLabel(
                               icon: Icons.send_to_mobile_outlined,
-                              text: "Transfer Balance",
+                              text: "Kirim Saldo",
                               iconColor: Colors.white,
                               textColor: Colors.white),
                         ),
@@ -238,7 +238,7 @@ class _HomeState extends State<Home> {
                           },
                           child: const IconWithLabel(
                               icon: Icons.question_answer,
-                              text: "Ask WBK",
+                              text: "Tanya WBK",
                               iconColor: Colors.white,
                               textColor: Colors.white),
                         ),

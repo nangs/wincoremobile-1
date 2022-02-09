@@ -29,7 +29,7 @@ class _ChangePasswordState extends State<ChangePassword> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: const Text('Change Password'),
+        title: const Text('Ubah Kata Sandi'),
         // backgroundColor: Colors.lightBlue,
       ),
       body:
@@ -45,7 +45,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                   controller: myPhoneNumberController,
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
-                    labelText: 'Phone Number',
+                    labelText: 'Nomor Telepon',
                   ),
                   onChanged: (text) {
                     nPhoneNumber = text;
@@ -58,7 +58,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                   controller: myAccountNumberController,
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
-                    labelText: 'Account Number',
+                    labelText: 'Nomor Telepon',
                   ),
                   onChanged: (text) {
                     nAccountNumber = text;
@@ -72,7 +72,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                   controller: myOldPasswordController,
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
-                    labelText: 'OLD Password',
+                    labelText: 'Kata Sandi Lama',
                   ),
                   onChanged: (text) {
                     nOldPassword = text;
@@ -86,7 +86,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                   controller: myNewPasswordController,
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
-                    labelText: 'New Password',
+                    labelText: 'Kata Sandi Baru',
                   ),
                   onChanged: (text) {
                     nNewPassword = text;
@@ -100,7 +100,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                   controller: myRePasswordController,
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
-                    labelText: 'Retype New Password',
+                    labelText: 'Ketik Ulang Kata Sandi Baru',
                   ),
                   onChanged: (text) {
                     nRePassword = text;
@@ -120,7 +120,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                     MaterialPageRoute(builder: (context) => const Home()));
               },
               child: const Text(
-                'Submit',
+                'Kirim',
                 style: TextStyle(fontSize: 30.0),
               ),
             )

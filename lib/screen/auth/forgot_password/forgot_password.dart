@@ -27,7 +27,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: const Text('Forgot Password'),
+        title: const Text('Lupa Kata Sandi'),
         // backgroundColor: Colors.lightBlue,
       ),
       body: SafeArea(
@@ -41,7 +41,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                   controller: myPhoneNumberController,
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
-                    labelText: 'Phone Number',
+                    labelText: 'Nomor Telepon',
                   ),
                   onChanged: (text) {
                     nPhoneNumber = text;
@@ -54,7 +54,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                   controller: myAccountNumberController,
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
-                    labelText: 'Account Number',
+                    labelText: 'Nomor Rekening',
                   ),
                   onChanged: (text) {
                     nAccountNumber = text;
@@ -68,7 +68,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                   controller: myPasswordController,
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
-                    labelText: 'New Password',
+                    labelText: 'Kata Sandi Baru',
                   ),
                   onChanged: (text) {
                     nPassword = text;
@@ -82,7 +82,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                   controller: myPassword2Controller,
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
-                    labelText: 'Retype New Password',
+                    labelText: 'Ketikan Ulang Kata Sandi Baru',
                   ),
                   onChanged: (text) {
                     nPassword2 = text;
@@ -102,7 +102,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                     MaterialPageRoute(builder: (context) => const Welcome()));
               },
               child: const Text(
-                'Submit',
+                'Kirim',
                 style: TextStyle(fontSize: 30.0),
               ),
             )

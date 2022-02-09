@@ -12,7 +12,7 @@ class _AccountBalanceState extends State<AccountBalance> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Balance Inquiry"),
+        title: const Text("Informasi Saldo"),
         backgroundColor: Colors.blue,
       ),
     );

@@ -32,7 +32,7 @@ class _ChangeMPinState extends State<ChangeMPin> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: const Text('Change M-PIN'),
+        title: const Text('Ubah M-PIN'),
         // backgroundColor: Colors.lightBlue,
       ),
       body:
@@ -48,7 +48,7 @@ class _ChangeMPinState extends State<ChangeMPin> {
                   controller: myPhoneNumberController,
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
-                    labelText: 'Phone Number',
+                    labelText: 'Nomor Telepon',
                   ),
                   onChanged: (text) {
                     nPhoneNumber = text;
@@ -61,7 +61,7 @@ class _ChangeMPinState extends State<ChangeMPin> {
                   controller: myAccountNumberController,
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
-                    labelText: 'Account Number',
+                    labelText: 'Nomor Rekening',
                   ),
                   onChanged: (text) {
                     nAccountNumber = text;
@@ -75,7 +75,7 @@ class _ChangeMPinState extends State<ChangeMPin> {
                   controller: myPasswordController,
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
-                    labelText: 'New MPIN',
+                    labelText: 'M-PIN Baru',
                   ),
                   onChanged: (text) {
                     nMPIN1 = text;
@@ -89,7 +89,7 @@ class _ChangeMPinState extends State<ChangeMPin> {
                   controller: myPassword2Controller,
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
-                    labelText: 'Retype New MPIN',
+                    labelText: 'Ketik Ulang M-PIN Baru',
                   ),
                   onChanged: (text) {
                     nMPIN2 = text;
@@ -131,7 +131,7 @@ class _ChangeMPinState extends State<ChangeMPin> {
                 print(tokenResponse.request_token);
               },
               child: const Text(
-                'Submit',
+                'Kirim',
                 style: TextStyle(fontSize: 30.0),
               ),
             )

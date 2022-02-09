@@ -84,7 +84,7 @@ class _Register2State extends State<Register2> {
       child: const Padding(
         padding: EdgeInsets.all(14.0),
         child: Text(
-          'Submit',
+          'Kirim',
           style: TextStyle(fontSize: 16),
         ),
       ),
@@ -122,8 +122,7 @@ class _Register2State extends State<Register2> {
           ),
         ),
       ),
-      child:
-          const Padding(padding: EdgeInsets.all(14.0), child: Text("Submit")),
+      child: const Padding(padding: EdgeInsets.all(14.0), child: Text("Kirim")),
     );
   }
 
@@ -184,13 +183,13 @@ class _Register2State extends State<Register2> {
                     MaterialPageRoute(builder: (context) => const Register()));
               } else if (state.dataLogin.status == "REGISTER_EXIST") {
                 AlertMessage(
-                    "Information", "Username telah digunakan", "OK", context);
+                    "Informasi", "Username telah digunakan", "OK", context);
               } else if (state.dataLogin.status == "INVALID_ACCOUNT_NO") {
-                AlertMessage("Information",
+                AlertMessage("Informasi",
                     "Nomor Rekening yang anda masukan salah", "OK", context);
               } else if (state.dataLogin.status == "VERIFICATION_FAILED") {
                 AlertMessage(
-                    "Information", "Data tidak terdaftar", "OK", context);
+                    "Informasi", "Data tidak terdaftar", "OK", context);
               }
             }
           },
@@ -202,7 +201,7 @@ class _Register2State extends State<Register2> {
                 child: Column(
                   children: [
                     const Text(
-                      "Input your personal data",
+                      "Masukan data pribadi anda",
                       style: TextStyle(
                         color: Colors.white,
                       ),
@@ -221,7 +220,7 @@ class _Register2State extends State<Register2> {
                           color: Colors.white,
                           icon: const Icon(Icons.date_range),
                         ),
-                        labelText: 'Date of Birth',
+                        labelText: 'Tangga Lahir',
                         labelStyle: const TextStyle(color: Colors.blueAccent),
                       ),
                       // keyboardType: TextInputType.datetime,
@@ -237,7 +236,7 @@ class _Register2State extends State<Register2> {
                       ),
                       controller: _noKtpController,
                       decoration: const InputDecoration(
-                        labelText: 'Identity Number',
+                        labelText: 'Nomor Identitas',
                         labelStyle: TextStyle(color: Colors.blueAccent),
                       ),
                       keyboardType: TextInputType.number,
@@ -250,7 +249,7 @@ class _Register2State extends State<Register2> {
                       ),
                       controller: _noRekController,
                       decoration: const InputDecoration(
-                        labelText: 'Account Number',
+                        labelText: 'Nomor Rekening',
                         labelStyle: TextStyle(color: Colors.blueAccent),
                       ),
                       keyboardType: TextInputType.number,
@@ -263,7 +262,7 @@ class _Register2State extends State<Register2> {
                       ),
                       controller: _userIdController,
                       decoration: const InputDecoration(
-                        labelText: 'User ID',
+                        labelText: 'Nama Pengguna',
                         labelStyle: TextStyle(color: Colors.blueAccent),
                       ),
                       keyboardType: TextInputType.text,
@@ -278,7 +277,7 @@ class _Register2State extends State<Register2> {
                       ),
                       controller: _passController,
                       decoration: const InputDecoration(
-                        labelText: 'Password',
+                        labelText: 'Kata Sandi',
                         labelStyle: TextStyle(color: Colors.blueAccent),
                       ),
                       keyboardType: TextInputType.visiblePassword,
@@ -293,7 +292,7 @@ class _Register2State extends State<Register2> {
                       ),
                       controller: _passConfController,
                       decoration: const InputDecoration(
-                        labelText: 'Re-Type Password',
+                        labelText: 'Ketikan Ulang Kata Sandi',
                         labelStyle: TextStyle(color: Colors.blueAccent),
                       ),
                       keyboardType: TextInputType.visiblePassword,
@@ -334,7 +333,7 @@ class _Register2State extends State<Register2> {
                       ),
                       controller: _mpinConfController,
                       decoration: const InputDecoration(
-                        labelText: 'Re-Type M-PIN',
+                        labelText: 'Ketikan Ulang M-PIN',
                         labelStyle: TextStyle(color: Colors.blueAccent),
                       ),
                       keyboardType: TextInputType.number,

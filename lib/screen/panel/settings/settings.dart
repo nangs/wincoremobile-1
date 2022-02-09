@@ -16,7 +16,7 @@ class _SettingsState extends State<Settings> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Settings"),
+        title: const Text("Pengaturan"),
         backgroundColor: Colors.blue,
       ),
       resizeToAvoidBottomInset: false,
@@ -29,7 +29,7 @@ class _SettingsState extends State<Settings> {
                     builder: (context) => const ChangePassword()));
               },
               child: const HorizontalFlatMenuWithIcon(
-                nameMenu: 'Change Password',
+                nameMenu: 'Ubah Kata Sandi',
                 icon: Icons.lock_open_sharp,
               ),
             ),
@@ -39,7 +39,7 @@ class _SettingsState extends State<Settings> {
                     builder: (context) => const ChangeMPin()));
               },
               child: const HorizontalFlatMenuWithIcon(
-                nameMenu: 'Change M-PIN',
+                nameMenu: 'Ubah M-PIN',
                 icon: Icons.password_sharp,
               ),
             ),
@@ -49,7 +49,7 @@ class _SettingsState extends State<Settings> {
                     MaterialPageRoute(builder: (context) => const SignIn()));
               },
               child: const HorizontalFlatMenuWithIcon(
-                nameMenu: 'Sign Out',
+                nameMenu: 'Keluar',
                 icon: Icons.exit_to_app_sharp,
               ),
             ),

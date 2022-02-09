@@ -12,7 +12,7 @@ class _TransferBalanceState extends State<TransferBalance> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Transfer Balance"),
+        title: const Text("Kirim Saldo"),
         backgroundColor: Colors.blue,
       ),
     );

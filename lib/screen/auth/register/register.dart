@@ -134,7 +134,7 @@ class _RegisterState extends State<Register> {
       child: const Padding(
         padding: EdgeInsets.all(14.0),
         child: Text(
-          'Submit',
+          'Kirim',
           style: TextStyle(fontSize: 16),
         ),
       ),
@@ -199,7 +199,7 @@ class _RegisterState extends State<Register> {
                 height: 24,
               ),
               const Text(
-                'Registration',
+                'Pendaftaran',
                 style: TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
@@ -210,7 +210,7 @@ class _RegisterState extends State<Register> {
                 height: 10,
               ),
               const Text(
-                "Add your phone number. We'll send you a verification code so we know you're real",
+                "Tambahkan nomor telepon Anda. Kami akan mengirimkan kode verifikasi agar kami tahu bahwa Anda asli.",
                 style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.bold,

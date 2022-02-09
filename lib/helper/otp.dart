@@ -65,7 +65,7 @@ class _OTPState extends State<OTP> {
                 height: 24,
               ),
               const Text(
-                'Verification',
+                'Verifikasi',
                 style: TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
@@ -76,7 +76,7 @@ class _OTPState extends State<OTP> {
                 height: 10,
               ),
               const Text(
-                "Enter your OTP code number",
+                "Masukan kode OTP yang anda terima.",
                 style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.bold,
@@ -369,7 +369,7 @@ class _OTPState extends State<OTP> {
                         child: const Padding(
                           padding: EdgeInsets.all(14.0),
                           child: Text(
-                            'Verify',
+                            'Verifikasi',
                             style: TextStyle(fontSize: 16),
                           ),
                         ),
