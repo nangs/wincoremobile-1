@@ -1,5 +1,7 @@
 // ignore_for_file: avoid_print
 
+import 'dart:convert';
+
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -46,64 +48,38 @@ class RegisterRepository {
     required RegisterRequest registerRequest,
   }) async {
     Response _response;
-    // Response _tokenResponse;
 
     try {
-      // print(token.toString());
-      // print(registerRequest.toJson().toString());
-
-      Map<String, dynamic> requestData = {
-        "message": """{
-            "accountno": ${registerRequest.accountno.toString()},
-            "identityno": ${registerRequest.identityno.toString()},
-            "birthdate": ${registerRequest.birthdate.toString()},
-            "username": ${registerRequest.username.toString()},
-            "password": ${registerRequest.password.toString()},
-            "mpin": ${registerRequest.mpin.toString()},
-            "phonenum": ${registerRequest.phonenum.toString()}
-          }""",
-      };
+      print("tokennya : " + token);
+      print("json : " + registerRequest.toJson().toString());
 
       _response = await _dio.post(
         "https://103.2.146.173:8443/mobileservice/Register",
-        // data: {
-        //   "message": registerRequest.toJson().toString()
-        // },
-        // data: {
-        //   "message": """{
-        //     "accountno": ${registerRequest.accountno.toString()},
-        //     "identityno": ${registerRequest.identityno.toString()},
-        //     "birthdate": ${registerRequest.birthdate.toString()},
-        //     "username": ${registerRequest.username.toString()},
-        //     "password": ${registerRequest.password.toString()},
-        //     "mpin": ${registerRequest.mpin.toString()},
-        //     "phonenum": ${registerRequest.phonenum.toString()}
-        //   }"""
-        // },
-        data: requestData,
+        data: jsonDecode(jsonEncode({"message": jsonEncode(registerRequest)})),
         options: Options(
           contentType: Headers.formUrlEncodedContentType,
           method: 'POST',
           headers: {'win_token': token.toString()},
         ),
       );
-      print(_response);
 
       RegisterResponse registerResponse =
           RegisterResponse.fromJson(_response.data);
-
+      print("Response : " + registerResponse.status.toString());
       //right itu untuk sukses
       return right(registerResponse);
     } on DioError catch (e) {
       //error dari dio
-      var errorMessage = e.response?.data.toString();
 
-      // print("status code : ");
-      // print(e.response?.statusCode);
+      print("status code : ");
+      print(e.response?.statusCode);
+      print("response data : ");
       print(e.response?.data);
-      // print(e.response?.headers);
-      // print(e.response?.requestOptions);
-      // print(e.response?.statusCode);
+      print("response Header : ");
+      print(e.response?.headers);
+      print("response requestOptions : ");
+      print(e.response?.requestOptions);
+      var errorMessage = e.response?.data.toString();
       switch (e.type) {
         case DioErrorType.connectTimeout:
           // Dio Error Handler
@@ -127,9 +103,10 @@ class RegisterRepository {
           break;
         case DioErrorType.other:
           // Dio Error Handler
-          errorMessage = e.message;
+          errorMessage = e.error.toString();
           break;
       }
+      print("Error Message : " + errorMessage.toString());
       //left itu untuk error
       return left(errorMessage.toString());
     }

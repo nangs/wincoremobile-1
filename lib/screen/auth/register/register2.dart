@@ -162,7 +162,7 @@ class _Register2State extends State<Register2> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      // resizeToAvoidBottomInset: false,
       backgroundColor: const Color(0xFF120A7C),
       body: BlocProvider(
         create: (context) => RegisterCubit(),
@@ -195,178 +195,190 @@ class _Register2State extends State<Register2> {
           },
           builder: (context, state) {
             return SafeArea(
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 24, horizontal: 32),
-                child: Column(
-                  children: [
-                    const Text(
-                      "Masukan data pribadi anda",
-                      style: TextStyle(
-                        color: Colors.white,
-                      ),
-                    ),
-                    TextField(
-                      controller: _dobController,
-                      style: const TextStyle(
-                        // fontSize: 18.0,
-                        color: Colors.white,
-                      ),
-                      decoration: InputDecoration(
-                        hintText: 'YYYY / MM / DD',
-                        hintStyle: const TextStyle(color: Colors.blueGrey),
-                        suffixIcon: IconButton(
-                          onPressed: _pickDateDialog,
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 24, horizontal: 32),
+                  child: Column(
+                    children: [
+                      const Text(
+                        "Masukan data pribadi anda",
+                        style: TextStyle(
                           color: Colors.white,
-                          icon: const Icon(Icons.date_range),
                         ),
-                        labelText: 'Tangga Lahir',
-                        labelStyle: const TextStyle(color: Colors.blueAccent),
                       ),
-                      // keyboardType: TextInputType.datetime,
-                      // inputFormatters: [
-                      //   FilteringTextInputFormatter.singleLineFormatter
-                      // ],
-                      readOnly: true,
-                    ),
-                    TextField(
-                      style: const TextStyle(
-                        // fontSize: 18.0,
-                        color: Colors.white,
+                      TextField(
+                        controller: _dobController,
+                        style: const TextStyle(
+                          // fontSize: 18.0,
+                          color: Colors.white,
+                        ),
+                        decoration: InputDecoration(
+                          hintText: 'YYYY / MM / DD',
+                          hintStyle: const TextStyle(color: Colors.blueGrey),
+                          suffixIcon: IconButton(
+                            onPressed: _pickDateDialog,
+                            color: Colors.white,
+                            icon: const Icon(Icons.date_range),
+                          ),
+                          labelText: 'Tangga Lahir',
+                          labelStyle: const TextStyle(color: Colors.blueAccent),
+                        ),
+                        // keyboardType: TextInputType.datetime,
+                        // inputFormatters: [
+                        //   FilteringTextInputFormatter.singleLineFormatter
+                        // ],
+                        readOnly: true,
                       ),
-                      controller: _noKtpController,
-                      decoration: const InputDecoration(
-                        labelText: 'Nomor Identitas',
-                        labelStyle: TextStyle(color: Colors.blueAccent),
+                      TextField(
+                        style: const TextStyle(
+                          // fontSize: 18.0,
+                          color: Colors.white,
+                        ),
+                        controller: _noKtpController,
+                        decoration: const InputDecoration(
+                          labelText: 'Nomor Identitas',
+                          labelStyle: TextStyle(color: Colors.blueAccent),
+                        ),
+                        keyboardType: TextInputType.number,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly
+                        ],
                       ),
-                      keyboardType: TextInputType.number,
-                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                    ),
-                    TextField(
-                      style: const TextStyle(
-                        // fontSize: 18.0,
-                        color: Colors.white,
+                      TextField(
+                        style: const TextStyle(
+                          // fontSize: 18.0,
+                          color: Colors.white,
+                        ),
+                        controller: _noRekController,
+                        decoration: const InputDecoration(
+                          labelText: 'Nomor Rekening',
+                          labelStyle: TextStyle(color: Colors.blueAccent),
+                        ),
+                        keyboardType: TextInputType.number,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly
+                        ],
                       ),
-                      controller: _noRekController,
-                      decoration: const InputDecoration(
-                        labelText: 'Nomor Rekening',
-                        labelStyle: TextStyle(color: Colors.blueAccent),
+                      TextField(
+                        style: const TextStyle(
+                          // fontSize: 18.0,
+                          color: Colors.white,
+                        ),
+                        controller: _userIdController,
+                        decoration: const InputDecoration(
+                          labelText: 'Nama Pengguna',
+                          labelStyle: TextStyle(color: Colors.blueAccent),
+                        ),
+                        keyboardType: TextInputType.text,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.singleLineFormatter
+                        ],
                       ),
-                      keyboardType: TextInputType.number,
-                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                    ),
-                    TextField(
-                      style: const TextStyle(
-                        // fontSize: 18.0,
-                        color: Colors.white,
+                      TextField(
+                        style: const TextStyle(
+                          // fontSize: 18.0,
+                          color: Colors.white,
+                        ),
+                        controller: _passController,
+                        decoration: const InputDecoration(
+                          labelText: 'Kata Sandi',
+                          labelStyle: TextStyle(color: Colors.blueAccent),
+                        ),
+                        keyboardType: TextInputType.visiblePassword,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.singleLineFormatter
+                        ],
                       ),
-                      controller: _userIdController,
-                      decoration: const InputDecoration(
-                        labelText: 'Nama Pengguna',
-                        labelStyle: TextStyle(color: Colors.blueAccent),
+                      TextField(
+                        style: const TextStyle(
+                          // fontSize: 18.0,
+                          color: Colors.white,
+                        ),
+                        controller: _passConfController,
+                        decoration: const InputDecoration(
+                          labelText: 'Ketikan Ulang Kata Sandi',
+                          labelStyle: TextStyle(color: Colors.blueAccent),
+                        ),
+                        keyboardType: TextInputType.visiblePassword,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.singleLineFormatter
+                        ],
+                        onChanged: (context) {
+                          if (_passController.text !=
+                              _passConfController.text) {
+                            setState(() {
+                              currentPasswordState = ValidationPasswordState
+                                  .diffPasswordWithConfirm;
+                            });
+                          } else {
+                            setState(() {
+                              currentPasswordState = ValidationPasswordState
+                                  .samePasswordWithConfirm;
+                            });
+                          }
+                        },
                       ),
-                      keyboardType: TextInputType.text,
-                      inputFormatters: [
-                        FilteringTextInputFormatter.singleLineFormatter
-                      ],
-                    ),
-                    TextField(
-                      style: const TextStyle(
-                        // fontSize: 18.0,
-                        color: Colors.white,
+                      TextField(
+                        style: const TextStyle(
+                          // fontSize: 18.0,
+                          color: Colors.white,
+                        ),
+                        controller: _mpinController,
+                        decoration: const InputDecoration(
+                          labelText: 'M-PIN',
+                          labelStyle: TextStyle(color: Colors.blueAccent),
+                        ),
+                        keyboardType: TextInputType.number,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly
+                        ],
                       ),
-                      controller: _passController,
-                      decoration: const InputDecoration(
-                        labelText: 'Kata Sandi',
-                        labelStyle: TextStyle(color: Colors.blueAccent),
+                      TextField(
+                        style: const TextStyle(
+                          // fontSize: 18.0,
+                          color: Colors.white,
+                        ),
+                        controller: _mpinConfController,
+                        decoration: const InputDecoration(
+                          labelText: 'Ketikan Ulang M-PIN',
+                          labelStyle: TextStyle(color: Colors.blueAccent),
+                        ),
+                        keyboardType: TextInputType.number,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly
+                        ],
+                        onChanged: (context) {
+                          if (_mpinController.text !=
+                              _mpinConfController.text) {
+                            setState(() {
+                              currentMPINState =
+                                  ValidationMPINState.diffMPINWithConfirm;
+                            });
+                          } else {
+                            setState(() {
+                              currentMPINState =
+                                  ValidationMPINState.sameMPINWithConfirm;
+                            });
+                          }
+                        },
                       ),
-                      keyboardType: TextInputType.visiblePassword,
-                      inputFormatters: [
-                        FilteringTextInputFormatter.singleLineFormatter
-                      ],
-                    ),
-                    TextField(
-                      style: const TextStyle(
-                        // fontSize: 18.0,
-                        color: Colors.white,
+                      const SizedBox(
+                        height: 10,
                       ),
-                      controller: _passConfController,
-                      decoration: const InputDecoration(
-                        labelText: 'Ketikan Ulang Kata Sandi',
-                        labelStyle: TextStyle(color: Colors.blueAccent),
-                      ),
-                      keyboardType: TextInputType.visiblePassword,
-                      inputFormatters: [
-                        FilteringTextInputFormatter.singleLineFormatter
-                      ],
-                      onChanged: (context) {
-                        if (_passController.text != _passConfController.text) {
-                          setState(() {
-                            currentPasswordState =
-                                ValidationPasswordState.diffPasswordWithConfirm;
-                          });
-                        } else {
-                          setState(() {
-                            currentPasswordState =
-                                ValidationPasswordState.samePasswordWithConfirm;
-                          });
-                        }
-                      },
-                    ),
-                    TextField(
-                      style: const TextStyle(
-                        // fontSize: 18.0,
-                        color: Colors.white,
-                      ),
-                      controller: _mpinController,
-                      decoration: const InputDecoration(
-                        labelText: 'M-PIN',
-                        labelStyle: TextStyle(color: Colors.blueAccent),
-                      ),
-                      keyboardType: TextInputType.number,
-                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                    ),
-                    TextField(
-                      style: const TextStyle(
-                        // fontSize: 18.0,
-                        color: Colors.white,
-                      ),
-                      controller: _mpinConfController,
-                      decoration: const InputDecoration(
-                        labelText: 'Ketikan Ulang M-PIN',
-                        labelStyle: TextStyle(color: Colors.blueAccent),
-                      ),
-                      keyboardType: TextInputType.number,
-                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                      onChanged: (context) {
-                        if (_mpinController.text != _mpinConfController.text) {
-                          setState(() {
-                            currentMPINState =
-                                ValidationMPINState.diffMPINWithConfirm;
-                          });
-                        } else {
-                          setState(() {
-                            currentMPINState =
-                                ValidationMPINState.sameMPINWithConfirm;
-                          });
-                        }
-                      },
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    SizedBox(
-                      width: double.infinity,
-                      child: (currentPasswordState ==
-                                  ValidationPasswordState
-                                      .samePasswordWithConfirm &&
-                              currentMPINState ==
-                                  ValidationMPINState.sameMPINWithConfirm)
-                          ? registerButton(context)
-                          : disabledButton(),
-                      // child: registerButton(context),
-                    )
-                  ],
+                      SizedBox(
+                        width: double.infinity,
+                        child: (currentPasswordState ==
+                                    ValidationPasswordState
+                                        .samePasswordWithConfirm &&
+                                currentMPINState ==
+                                    ValidationMPINState.sameMPINWithConfirm)
+                            ? registerButton(context)
+                            : disabledButton(),
+                        // child: registerButton(context),
+                      )
+                    ],
+                  ),
                 ),
               ),
             );

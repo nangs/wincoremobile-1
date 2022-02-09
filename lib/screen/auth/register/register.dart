@@ -2,7 +2,7 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:wincoremobile/screen/panel/home/home.dart';
+// import 'package:wincoremobile/screen/panel/home/home.dart';
 import 'package:wincoremobile/helper/otp.dart';
 
 // import 'package:flutter_bloc/flutter_bloc.dart';
@@ -40,6 +40,7 @@ class _RegisterState extends State<Register> {
     });
 
     try {
+      // ignore: unused_local_variable
       final authCredential =
           await _auth.signInWithCredential(phoneAuthCredential);
 
@@ -47,10 +48,10 @@ class _RegisterState extends State<Register> {
         showLoading = false;
       });
 
-      if (authCredential.user != null) {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => const Home()));
-      }
+      // if (authCredential.user != null) {
+      //   Navigator.push(
+      //       context, MaterialPageRoute(builder: (context) => const Home()));
+      // }
     } on FirebaseAuthException catch (e) {
       setState(() {
         showLoading = false;
@@ -163,117 +164,121 @@ class _RegisterState extends State<Register> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      // resizeToAvoidBottomInset: false,
       backgroundColor: const Color(0xFF120A7C),
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 32),
-          child: Column(
-            children: [
-              Align(
-                alignment: Alignment.topLeft,
-                child: GestureDetector(
-                  onTap: () => Navigator.pop(context),
-                  child: const Icon(
-                    Icons.arrow_back,
-                    size: 32,
-                    color: Colors.grey,
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 32),
+            child: Column(
+              children: [
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: GestureDetector(
+                    onTap: () => Navigator.pop(context),
+                    child: const Icon(
+                      Icons.arrow_back,
+                      size: 32,
+                      color: Colors.grey,
+                    ),
                   ),
                 ),
-              ),
-              const SizedBox(
-                height: 18,
-              ),
-              Container(
-                width: 200,
-                height: 200,
-                decoration: BoxDecoration(
-                  color: Colors.deepPurple.shade50,
-                  shape: BoxShape.circle,
+                const SizedBox(
+                  height: 18,
                 ),
-                child: Image.asset(
-                  'assets/images/illustration/illustration-2.png',
+                Container(
+                  width: 200,
+                  height: 200,
+                  decoration: BoxDecoration(
+                    color: Colors.deepPurple.shade50,
+                    shape: BoxShape.circle,
+                  ),
+                  child: Image.asset(
+                    'assets/images/illustration/illustration-2.png',
+                  ),
                 ),
-              ),
-              const SizedBox(
-                height: 24,
-              ),
-              const Text(
-                'Pendaftaran',
-                style: TextStyle(
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
+                const SizedBox(
+                  height: 24,
                 ),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              const Text(
-                "Tambahkan nomor telepon Anda. Kami akan mengirimkan kode verifikasi agar kami tahu bahwa Anda asli.",
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white60,
+                const Text(
+                  'Pendaftaran',
+                  style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
                 ),
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(
-                height: 28,
-              ),
-              Container(
-                padding: const EdgeInsets.all(28),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(12),
+                const SizedBox(
+                  height: 10,
                 ),
-                child: Column(
-                  children: [
-                    TextFormField(
-                      controller: _mobileNumberController,
-                      keyboardType: TextInputType.number,
-                      style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      decoration: InputDecoration(
-                        enabledBorder: OutlineInputBorder(
-                            borderSide: const BorderSide(color: Colors.black12),
-                            borderRadius: BorderRadius.circular(10)),
-                        focusedBorder: OutlineInputBorder(
-                            borderSide: const BorderSide(color: Colors.black12),
-                            borderRadius: BorderRadius.circular(10)),
-                        prefix: const Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 8),
-                          child: Text(
-                            '(+62)',
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
+                const Text(
+                  "Tambahkan nomor telepon Anda. Kami akan mengirimkan kode verifikasi agar kami tahu bahwa Anda asli.",
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white60,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(
+                  height: 28,
+                ),
+                Container(
+                  padding: const EdgeInsets.all(28),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Column(
+                    children: [
+                      TextFormField(
+                        controller: _mobileNumberController,
+                        keyboardType: TextInputType.number,
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        decoration: InputDecoration(
+                          enabledBorder: OutlineInputBorder(
+                              borderSide:
+                                  const BorderSide(color: Colors.black12),
+                              borderRadius: BorderRadius.circular(10)),
+                          focusedBorder: OutlineInputBorder(
+                              borderSide:
+                                  const BorderSide(color: Colors.black12),
+                              borderRadius: BorderRadius.circular(10)),
+                          prefix: const Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 8),
+                            child: Text(
+                              '(+62)',
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
+                          // suffixIcon: const Icon(
+                          //   Icons.check_circle,
+                          //   color: Colors.green,
+                          //   size: 32,
+                          // ),
                         ),
-                        // suffixIcon: const Icon(
-                        //   Icons.check_circle,
-                        //   color: Colors.green,
-                        //   size: 32,
-                        // ),
                       ),
-                    ),
-                    const SizedBox(
-                      height: 22,
-                    ),
-                    SizedBox(
-                      width: double.infinity,
-                      child:
-                          currentState == MobileVerificationState.sendOTPSTATE
-                              ? loadingOTPButton()
-                              : requestOTPButton(context),
-                    )
-                  ],
+                      const SizedBox(
+                        height: 22,
+                      ),
+                      SizedBox(
+                        width: double.infinity,
+                        child:
+                            currentState == MobileVerificationState.sendOTPSTATE
+                                ? loadingOTPButton()
+                                : requestOTPButton(context),
+                      )
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

@@ -13,7 +13,7 @@ class _AboutState extends State<About> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Tentang Kami"),
-        backgroundColor: Colors.blue,
+        backgroundColor: const Color(0xff120A7C),
       ),
     );
   }

@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wincoremobile/application/auth/auth_cubit.dart';
 import 'package:wincoremobile/domain/model/auth/auth_request.dart';
 import 'package:wincoremobile/helper/alert_message.dart';
+import 'package:wincoremobile/screen/auth/forgot_password/forgot_password.dart';
 import 'package:wincoremobile/screen/auth/register/register.dart';
 import 'package:wincoremobile/screen/panel/home/home.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -25,160 +26,208 @@ class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      // resizeToAvoidBottomInset: false,
       backgroundColor: const Color(0xff120A7C),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 32),
-        child: BlocProvider(
-          create: (context) => AuthCubit(),
-          child: BlocConsumer<AuthCubit, AuthState>(
-            listener: (context, state) {
-              if (state is AuthError) {
-                print(state.errorMsg);
-              } else if (state is AuthLoading) {
-                print("Now is Loading");
-              } else if (state is AuthLoginSuccess) {
-                print(state.dataLogin);
-                if (state.dataLogin.status == "LOGIN_OK") {
-                  Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => Home()));
-                } else {
-                  alertLoginError(context);
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 100, horizontal: 32),
+          child: BlocProvider(
+            create: (context) => AuthCubit(),
+            child: BlocConsumer<AuthCubit, AuthState>(
+              listener: (context, state) {
+                if (state is AuthError) {
+                  print(state.errorMsg);
+                } else if (state is AuthLoading) {
+                  print("Now is Loading");
+                } else if (state is AuthLoginSuccess) {
+                  print(state.dataLogin);
+                  if (state.dataLogin.status == "LOGIN_OK") {
+                    var username = state.dataLogin.info?.accountName.toString();
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            Home(username: username.toString()),
+                      ),
+                    );
+                  } else {
+                    alertLoginError(context);
+                  }
                 }
-              }
-            },
-            builder: (context, state) {
-              return SafeArea(
-                child: Padding(
-                  padding: EdgeInsets.all(14),
-                  child: Container(
-                    alignment: Alignment.topCenter,
-                    // margin: EdgeInsets.symmetric(horizontal: 50),
-                    // color: Color(0xffffffff),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            SizedBox(
-                              child: Image.asset('assets/images/WINCore.jpeg'),
-                              // width: 200,
-                              // margin: EdgeInsets.symmetric(vertical: 30),
-                            ),
-                            SizedBox(
-                              height: 8,
-                            ),
-                            Text(
-                              "SIGN IN",
-                              style: TextStyle(
-                                fontSize: 21,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.amber[50],
+              },
+              builder: (context, state) {
+                return SafeArea(
+                  child: Padding(
+                    padding: EdgeInsets.all(14),
+                    child: Container(
+                      alignment: Alignment.topCenter,
+                      // margin: EdgeInsets.symmetric(horizontal: 50),
+                      // color: Color(0xffffffff),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              SizedBox(
+                                child:
+                                    Image.asset('assets/images/WINCore.jpeg'),
+                                // width: 200,
+                                // margin: EdgeInsets.symmetric(vertical: 30),
                               ),
-                            ),
-                          ],
-                        ),
-                        TextFormField(
-                          controller: _userController,
-                          decoration: InputDecoration(
-                            // border: UnderlineInputBorder(),
-                            prefixIcon: Icon(
-                              Icons.person_outline,
-                              color: Colors.white,
-                            ),
-                            hintText: "Username",
-                            // iconColor: Colors.white,
-                            hintStyle: TextStyle(color: Colors.white),
-                          ),
-                          style: TextStyle(
-                            color: Colors.amber[50],
-                          ),
-                        ),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        TextFormField(
-                          controller: _passwordController,
-                          decoration: InputDecoration(
-                            // border: UnderlineInputBorder(),
-                            prefixIcon: Icon(
-                              Icons.lock_open,
-                              color: Colors.white,
-                            ),
-                            hintText: "Password",
-                            // iconColor: Colors.white,
-                            hintStyle: TextStyle(
-                              color: Colors.amber[50],
-                            ),
-                            suffixIcon: IconButton(
-                              icon: Icon(
-                                _isObscure
-                                    ? Icons.visibility
-                                    : Icons.visibility_off,
-                                color: Colors.white,
+                              SizedBox(
+                                height: 75,
                               ),
-                              onPressed: () {
-                                setState(() {
-                                  _isObscure = !_isObscure;
-                                });
-                              },
-                            ),
-                          ),
-                          style: TextStyle(
-                            color: Colors.amber[50],
-                          ),
-                          obscureText: _isObscure,
-                          enableSuggestions: false,
-                          autocorrect: false,
-                        ),
-                        SizedBox(
-                          height: 8,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "Don't have an account? ",
-                              style: GoogleFonts.nunito(
-                                textStyle: TextStyle(
+                              Text(
+                                "SIGN IN",
+                                style: TextStyle(
+                                  fontSize: 21,
+                                  fontWeight: FontWeight.bold,
                                   color: Colors.amber[50],
                                 ),
                               ),
-                            ),
-                            InkWell(
-                              child: Text(
-                                "Register Here",
-                                style: GoogleFonts.nunito(
-                                  textStyle: TextStyle(color: Colors.blue[300]),
-                                ),
+                            ],
+                          ),
+                          TextFormField(
+                            controller: _userController,
+                            decoration: InputDecoration(
+                              // border: UnderlineInputBorder(),
+                              prefixIcon: Icon(
+                                Icons.person_outline,
+                                color: Colors.white,
                               ),
-                              onTap: () {
-                                Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (context) => Register()));
-
-                                // Navigator.of(context).push(MaterialPageRoute(
-                                //     builder: (context) => Register()));
-                              },
+                              hintText: "Username",
+                              // iconColor: Colors.white,
+                              hintStyle: TextStyle(color: Colors.white),
                             ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Container(
-                          width: 100,
-                          margin: EdgeInsets.only(top: 10),
-                          child: (state is AuthLoading)
-                              ? _flatLoadingButton()
-                              : _flatLoginButton(context),
-                        )
-                      ],
+                            style: TextStyle(
+                              color: Colors.amber[50],
+                            ),
+                          ),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          TextFormField(
+                            controller: _passwordController,
+                            decoration: InputDecoration(
+                              // border: UnderlineInputBorder(),
+                              prefixIcon: Icon(
+                                Icons.lock_open,
+                                color: Colors.white,
+                              ),
+                              hintText: "Password",
+                              // iconColor: Colors.white,
+                              hintStyle: TextStyle(
+                                color: Colors.amber[50],
+                              ),
+                              suffixIcon: IconButton(
+                                icon: Icon(
+                                  _isObscure
+                                      ? Icons.visibility
+                                      : Icons.visibility_off,
+                                  color: Colors.white,
+                                ),
+                                onPressed: () {
+                                  setState(() {
+                                    _isObscure = !_isObscure;
+                                  });
+                                },
+                              ),
+                            ),
+                            style: TextStyle(
+                              color: Colors.amber[50],
+                            ),
+                            obscureText: _isObscure,
+                            enableSuggestions: false,
+                            autocorrect: false,
+                          ),
+                          SizedBox(
+                            height: 8,
+                          ),
+                          Container(
+                            width: 100,
+                            margin: EdgeInsets.only(top: 10),
+                            child: (state is AuthLoading)
+                                ? _flatLoadingButton()
+                                : _flatLoginButton(context),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 75),
+                            child: Column(
+                              children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    InkWell(
+                                      child: Text(
+                                        "Forgot Password ?",
+                                        style: GoogleFonts.nunito(
+                                          textStyle: TextStyle(
+                                              color: Colors.blue[300]),
+                                        ),
+                                      ),
+                                      onTap: () {
+                                        Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    ForgotPassword()));
+
+                                        // Navigator.of(context).push(MaterialPageRoute(
+                                        //     builder: (context) => Register()));
+                                      },
+                                    ),
+                                  ],
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(8),
+                                  child: Text(
+                                    "OR",
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      "Don't have an account? ",
+                                      style: GoogleFonts.nunito(
+                                        textStyle: TextStyle(
+                                          color: Colors.amber[50],
+                                        ),
+                                      ),
+                                    ),
+                                    InkWell(
+                                      child: Text(
+                                        "Register Here",
+                                        style: GoogleFonts.nunito(
+                                          textStyle: TextStyle(
+                                              color: Colors.blue[300]),
+                                        ),
+                                      ),
+                                      onTap: () {
+                                        Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    Register()));
+
+                                        // Navigator.of(context).push(MaterialPageRoute(
+                                        //     builder: (context) => Register()));
+                                      },
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              );
-            },
+                );
+              },
+            ),
           ),
         ),
       ),

@@ -13,7 +13,7 @@ class _AccountBalanceState extends State<AccountBalance> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Informasi Saldo"),
-        backgroundColor: Colors.blue,
+        backgroundColor: const Color(0xff120A7C),
       ),
     );
   }

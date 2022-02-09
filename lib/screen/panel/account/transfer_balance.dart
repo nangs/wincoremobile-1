@@ -13,7 +13,7 @@ class _TransferBalanceState extends State<TransferBalance> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Kirim Saldo"),
-        backgroundColor: Colors.blue,
+        backgroundColor: const Color(0xff120A7C),
       ),
     );
   }

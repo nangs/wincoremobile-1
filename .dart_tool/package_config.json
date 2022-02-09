@@ -20,6 +20,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "carousel_slider",
+      "rootUri": "file:///D:/Program%20Files/SDK/Flutter/.pub-cache/hosted/pub.dartlang.org/carousel_slider-4.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "characters",
       "rootUri": "file:///D:/Program%20Files/SDK/Flutter/.pub-cache/hosted/pub.dartlang.org/characters-1.2.0",
       "packageUri": "lib/",
@@ -148,6 +154,12 @@
     {
       "name": "flutter_web_plugins",
       "rootUri": "file:///D:/Program%20Files/SDK/Flutter/packages/flutter_web_plugins",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "font_awesome_flutter",
+      "rootUri": "file:///D:/Program%20Files/SDK/Flutter/.pub-cache/hosted/pub.dartlang.org/font_awesome_flutter-9.2.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -356,7 +368,7 @@
       "languageVersion": "2.12"
     }
   ],
-  "generated": "2022-02-09T15:41:19.004255Z",
+  "generated": "2022-02-09T17:20:32.068817Z",
   "generator": "pub",
   "generatorVersion": "2.15.1"
 }
