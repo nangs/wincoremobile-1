@@ -1,0 +1,4 @@
+#Sat Feb 05 12:18:40 ICT 2022
+base.0=D\:\\Office\\Mobile\\wincore_mobile\\wincoremobile\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
+renamed.0=classes.dex
+path.0=classes.dex
