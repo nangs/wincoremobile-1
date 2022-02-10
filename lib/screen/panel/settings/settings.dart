@@ -21,39 +21,41 @@ class _SettingsState extends State<Settings> {
       ),
       resizeToAvoidBottomInset: false,
       body: SafeArea(
-        child: Column(
-          children: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => const ChangePassword()));
-              },
-              child: const HorizontalFlatMenuWithIcon(
-                nameMenu: 'Ubah Kata Sandi',
-                icon: Icons.lock_open_sharp,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => const ChangePassword()));
+                },
+                child: const HorizontalFlatMenuWithIcon(
+                  nameMenu: 'Ubah Kata Sandi',
+                  icon: Icons.lock_open_sharp,
+                ),
               ),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => const ChangeMPin()));
-              },
-              child: const HorizontalFlatMenuWithIcon(
-                nameMenu: 'Ubah M-PIN',
-                icon: Icons.password_sharp,
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => const ChangeMPin()));
+                },
+                child: const HorizontalFlatMenuWithIcon(
+                  nameMenu: 'Ubah M-PIN',
+                  icon: Icons.password_sharp,
+                ),
               ),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (context) => const SignIn()));
-              },
-              child: const HorizontalFlatMenuWithIcon(
-                nameMenu: 'Keluar',
-                icon: Icons.exit_to_app_sharp,
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => const SignIn()));
+                },
+                child: const HorizontalFlatMenuWithIcon(
+                  nameMenu: 'Keluar',
+                  icon: Icons.exit_to_app_sharp,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

@@ -221,7 +221,7 @@ class _Register2State extends State<Register2> {
                             color: Colors.white,
                             icon: const Icon(Icons.date_range),
                           ),
-                          labelText: 'Tangga Lahir',
+                          labelText: 'Tanggal Lahir',
                           labelStyle: const TextStyle(color: Colors.blueAccent),
                         ),
                         // keyboardType: TextInputType.datetime,

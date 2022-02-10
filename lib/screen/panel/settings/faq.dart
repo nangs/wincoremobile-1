@@ -15,6 +15,14 @@ class _FAQState extends State<FAQ> {
         title: const Text("Pertanyaan dan Dukungan"),
         backgroundColor: const Color(0xff120A7C),
       ),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(8),
+            child: Container(),
+          ),
+        ),
+      ),
     );
   }
 }
