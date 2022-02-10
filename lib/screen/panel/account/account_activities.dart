@@ -162,16 +162,30 @@ class _AccountActivitiesState extends State<AccountActivities> {
                         onPressed: () {
                           if (_startDateController.text.isNotEmpty &&
                               _endDateController.text.isNotEmpty) {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => AccountActivitiesDetails(
-                                  startDate: _startDateController.text,
-                                  endDate: _endDateController.text,
-                                  no_rek: _noRekController.text,
+                            var today = DateTime.now();
+
+                            if (today.difference(_selectedStartDate).inDays >
+                                    31 &&
+                                today.difference(_selectedEndDate).inDays >
+                                    31) {
+                              AlertMessage(
+                                  "Informasi",
+                                  "Mutasi Rekening yang dipilih Maksimal 31 Hari kebelakang",
+                                  "OK",
+                                  context);
+                            } else {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      AccountActivitiesDetails(
+                                    startDate: _startDateController.text,
+                                    endDate: _endDateController.text,
+                                    no_rek: _noRekController.text,
+                                  ),
                                 ),
-                              ),
-                            );
+                              );
+                            }
                           } else {
                             AlertMessage(
                                 "Informasi",
