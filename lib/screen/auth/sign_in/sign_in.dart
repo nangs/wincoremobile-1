@@ -43,10 +43,14 @@ class _SignInState extends State<SignIn> {
                   print(state.dataLogin);
                   if (state.dataLogin.status == "LOGIN_OK") {
                     var username = state.dataLogin.info?.accountName.toString();
+                    var noRek =
+                        state.dataLogin.info?.accountList?[0].toString();
                     Navigator.of(context).pushReplacement(
                       MaterialPageRoute(
-                        builder: (context) =>
-                            Home(username: username.toString()),
+                        builder: (context) => Home(
+                          username: username.toString(),
+                          no_rek: noRek.toString(),
+                        ),
                       ),
                     );
                   } else {
@@ -69,8 +73,8 @@ class _SignInState extends State<SignIn> {
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
                               SizedBox(
-                                child:
-                                    Image.asset('assets/images/WINCore.jpeg'),
+                                child: Image.asset(
+                                    'assets/images/WINCore copy.png'),
                                 // width: 200,
                                 // margin: EdgeInsets.symmetric(vertical: 30),
                               ),

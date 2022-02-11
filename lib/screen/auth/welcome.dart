@@ -9,7 +9,9 @@ class Welcome extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: const Color(0xff120A7C),
+      // backgroundColor: const Color(0xff120A7C),
+
+      backgroundColor: Colors.black,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 22, horizontal: 32),
@@ -41,7 +43,7 @@ class Welcome extends StatelessWidget {
                 height: 120,
               ),
               Image.asset(
-                'assets/images/WINCore.jpeg',
+                'assets/images/WINCore copy.png',
                 width: double.infinity,
               ),
               const SizedBox(
@@ -58,8 +60,8 @@ class Welcome extends StatelessWidget {
                   style: ButtonStyle(
                       foregroundColor:
                           MaterialStateProperty.all<Color>(Colors.white),
-                      backgroundColor:
-                          MaterialStateProperty.all<Color>(Colors.blue),
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                          Colors.blue.shade900),
                       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                           RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(24)))),
@@ -92,8 +94,8 @@ class Welcome extends StatelessWidget {
                   style: ButtonStyle(
                       foregroundColor:
                           MaterialStateProperty.all<Color>(Colors.blue),
-                      backgroundColor:
-                          MaterialStateProperty.all<Color>(Colors.white),
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                          Colors.grey.shade300),
                       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                           RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(24)))),

@@ -7,7 +7,7 @@ import 'package:intl/intl.dart';
 import 'package:wincoremobile/application/register/cubit/register_cubit.dart';
 import 'package:wincoremobile/domain/model/register/register_request.dart';
 import 'package:wincoremobile/helper/alert_message.dart';
-import 'package:wincoremobile/screen/auth/register/register.dart';
+import 'package:wincoremobile/screen/auth/sign_in/sign_in.dart';
 
 // import 'package:flutter_bloc/flutter_bloc.dart';
 // import 'package:provider/src/provider.dart';
@@ -179,8 +179,22 @@ class _Register2State extends State<Register2> {
               print("register is loading now");
             } else if (state is RegisterSuccessState) {
               if (state.dataLogin.status == "REGISTER_OK") {
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => const Register()));
+                var accname = state.dataLogin.info?.accountName.toString();
+                showDialog(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                      title: Text("Hi, " + accname.toString()),
+                      content: const Text("Registrasi akun anda berhasil !"),
+                      actions: <Widget>[
+                        FlatButton(
+                          child: const Text('OK'),
+                          onPressed: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => const SignIn()));
+                          },
+                        ),
+                      ]),
+                );
               } else if (state.dataLogin.status == "REGISTER_EXIST") {
                 AlertMessage(
                     "Informasi", "Username telah digunakan", "OK", context);

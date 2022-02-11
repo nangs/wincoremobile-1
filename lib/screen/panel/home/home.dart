@@ -12,8 +12,10 @@ import 'package:wincoremobile/screen/panel/settings/faq.dart';
 import 'package:wincoremobile/screen/panel/settings/settings.dart';
 
 class Home extends StatefulWidget {
-  Home({Key? key, required this.username}) : super(key: key);
+  Home({Key? key, required this.username, required this.no_rek})
+      : super(key: key);
   String username;
+  String no_rek;
   @override
   _HomeState createState() => _HomeState();
 }
@@ -151,7 +153,7 @@ class _HomeState extends State<Home> {
                     child: Padding(
                       padding: const EdgeInsets.fromLTRB(40, 15, 40, 5),
                       child: Text(
-                        "Hi, ${widget.username.toUpperCase()}",
+                        "Hai, ${widget.username.toUpperCase()}",
                         textAlign: TextAlign.left,
                         style: const TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 20),
@@ -175,8 +177,10 @@ class _HomeState extends State<Home> {
                               child: InkWell(
                                 onTap: () {
                                   Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (context) =>
-                                          const AccountBalance()));
+                                      builder: (context) => AccountBalance(
+                                            nama: widget.username,
+                                            no_rek: widget.no_rek,
+                                          )));
                                 },
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -188,7 +192,7 @@ class _HomeState extends State<Home> {
                                     ),
                                     const SizedBox(height: 20),
                                     const Text(
-                                      "Account Information",
+                                      "Informasi Saldo",
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
                                           fontSize: 10, color: Colors.black87),
@@ -212,7 +216,7 @@ class _HomeState extends State<Home> {
                                 onTap: () {
                                   Navigator.of(context).push(MaterialPageRoute(
                                       builder: (context) => AccountActivities(
-                                          no_rek: "123456789")));
+                                          no_rek: widget.no_rek)));
                                 },
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -224,7 +228,7 @@ class _HomeState extends State<Home> {
                                     ),
                                     const SizedBox(height: 20),
                                     const Text(
-                                      "Account Activities",
+                                      "Mutasi Saldo",
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
                                           fontSize: 10, color: Colors.black87),
@@ -260,7 +264,7 @@ class _HomeState extends State<Home> {
                                     ),
                                     const SizedBox(height: 20),
                                     const Text(
-                                      "Transfer Balance",
+                                      "Kirim Saldo",
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
                                           fontSize: 10, color: Colors.black87),
@@ -293,7 +297,7 @@ class _HomeState extends State<Home> {
                                         FontAwesomeIcons.shoppingBasket),
                                     const SizedBox(height: 20),
                                     const Text(
-                                      "e-Commerce Payment",
+                                      "Pembayaran",
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
                                           fontSize: 10, color: Colors.black87),
@@ -328,7 +332,7 @@ class _HomeState extends State<Home> {
                                     ),
                                     const SizedBox(height: 20),
                                     const Text(
-                                      "Ask WBK",
+                                      "Tanya WBK",
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
                                           fontSize: 10, color: Colors.black87),
@@ -363,7 +367,7 @@ class _HomeState extends State<Home> {
                                     ),
                                     const SizedBox(height: 20),
                                     const Text(
-                                      "Settings",
+                                      "Pengaturan",
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
                                           fontSize: 10, color: Colors.black87),

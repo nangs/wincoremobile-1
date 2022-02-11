@@ -165,7 +165,7 @@ class _AccountActivitiesState extends State<AccountActivities> {
                             var today = DateTime.now();
 
                             if (today.difference(_selectedStartDate).inDays >
-                                    31 &&
+                                    31 ||
                                 today.difference(_selectedEndDate).inDays >
                                     31) {
                               AlertMessage(
@@ -174,17 +174,28 @@ class _AccountActivitiesState extends State<AccountActivities> {
                                   "OK",
                                   context);
                             } else {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      AccountActivitiesDetails(
-                                    startDate: _startDateController.text,
-                                    endDate: _endDateController.text,
-                                    no_rek: _noRekController.text,
+                              if (_selectedEndDate
+                                      .difference(_selectedStartDate)
+                                      .inDays >
+                                  7) {
+                                AlertMessage(
+                                    "Informasi",
+                                    "Mutasi Rekening yang ditampilkan Maksimal 7 hari",
+                                    "OK",
+                                    context);
+                              } else {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        AccountActivitiesDetails(
+                                      startDate: _startDateController.text,
+                                      endDate: _endDateController.text,
+                                      no_rek: _noRekController.text,
+                                    ),
                                   ),
-                                ),
-                              );
+                                );
+                              }
                             }
                           } else {
                             AlertMessage(

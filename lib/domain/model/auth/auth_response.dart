@@ -1,5 +1,4 @@
 // ignore_for_file: prefer_collection_literals, unnecessary_new, unnecessary_this
-
 class AuthResponse {
   Info? info;
   String? status;
@@ -23,16 +22,19 @@ class AuthResponse {
 
 class Info {
   String? accountName;
+  List<String>? accountList;
 
-  Info({this.accountName});
+  Info({this.accountName, this.accountList});
 
   Info.fromJson(Map<String, dynamic> json) {
     accountName = json['account_name'];
+    accountList = json['account_list'].cast<String>();
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['account_name'] = this.accountName;
+    data['account_list'] = this.accountList;
     return data;
   }
 }

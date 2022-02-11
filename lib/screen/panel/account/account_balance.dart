@@ -3,8 +3,11 @@
 import 'package:flutter/material.dart';
 
 class AccountBalance extends StatefulWidget {
-  const AccountBalance({Key? key}) : super(key: key);
+  AccountBalance({Key? key, required this.nama, required this.no_rek})
+      : super(key: key);
 
+  String nama;
+  String no_rek;
   @override
   State<AccountBalance> createState() => _AccountBalanceState();
 }
@@ -31,11 +34,11 @@ class _AccountBalanceState extends State<AccountBalance> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Henry Wijaya",
+                          widget.nama,
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 20),
                         ),
-                        Text("5271119926")
+                        Text(widget.no_rek)
                       ],
                     ),
                   ),
