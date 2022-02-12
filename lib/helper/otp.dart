@@ -1,13 +1,21 @@
+// ignore_for_file: file_names, unnecessary_new, prefer_collection_literals, unnecessary_this
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:wincoremobile/screen/auth/forgot_password/forgot_password_step1_1.dart';
 import 'package:wincoremobile/screen/auth/register/register2.dart';
 
 class OTP extends StatefulWidget {
-  const OTP({Key? key, required this.nomorHp, required this.verificationId})
-      : super(key: key);
+  const OTP({
+    Key? key,
+    required this.nomorHp,
+    required this.verificationId,
+    required this.paramMenu,
+  }) : super(key: key);
 
   final String nomorHp;
   final String verificationId;
+  final String paramMenu;
   @override
   State<OTP> createState() => _OTPState();
 }
@@ -432,10 +440,21 @@ class _OTPState extends State<OTP> {
       // });
 
       if (authCredential.user != null) {
-        Navigator.pushReplacement(
+        if (widget.paramMenu == "ForgotPassword") {
+          Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-                builder: (context) => Register2(noHp: widget.nomorHp)));
+              builder: (context) => ForgotPasswordStep1(
+                phone_no: widget.nomorHp,
+              ),
+            ),
+          );
+        } else if (widget.paramMenu == "Register") {
+          Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => Register2(noHp: widget.nomorHp)));
+        }
       }
     } on FirebaseAuthException catch (e) {
       setState(() {

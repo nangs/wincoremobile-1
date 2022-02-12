@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wincoremobile/application/auth/auth_cubit.dart';
 import 'package:wincoremobile/domain/model/auth/auth_request.dart';
 import 'package:wincoremobile/helper/alert_message.dart';
-import 'package:wincoremobile/screen/auth/forgot_password/forgot_password.dart';
+import 'package:wincoremobile/screen/auth/forgot_password/forgot_password_step1.dart';
 import 'package:wincoremobile/screen/auth/register/register.dart';
 import 'package:wincoremobile/screen/panel/home/home.dart';
 import 'package:google_fonts/google_fonts.dart';
