@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_print, deprecated_member_use
+// ignore_for_file: avoid_print
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -186,11 +186,12 @@ class _Register2State extends State<Register2> {
                       title: Text("Hi, " + accname.toString()),
                       content: const Text("Registrasi akun anda berhasil !"),
                       actions: <Widget>[
-                        FlatButton(
+                        ElevatedButton(
                           child: const Text('OK'),
                           onPressed: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => const SignIn()));
+                            Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                    builder: (context) => const SignIn()));
                           },
                         ),
                       ]),

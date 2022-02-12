@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_adjacent_string_concatenation
+// ignore_for_file: file_names, unnecessary_new, prefer_collection_literals, unnecessary_this, avoid_print, non_constant_identifier_names, prefer_const_literals_to_create_immutables, must_be_immutable
 
 import 'package:flutter/material.dart';
 
@@ -13,6 +13,8 @@ class AccountBalance extends StatefulWidget {
 }
 
 class _AccountBalanceState extends State<AccountBalance> {
+  double saldo = 250000.62;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,7 +37,7 @@ class _AccountBalanceState extends State<AccountBalance> {
                       children: [
                         Text(
                           widget.nama,
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 20),
                         ),
                         Text(widget.no_rek)
@@ -64,9 +66,9 @@ class _AccountBalanceState extends State<AccountBalance> {
                               "Saldo anda :",
                               textAlign: TextAlign.left,
                             ),
-                            const Text(
-                              "Rp " + "250.000,00",
-                              style: TextStyle(
+                            Text(
+                              "Rp " + saldo.toString(),
+                              style: const TextStyle(
                                   fontSize: 20, fontWeight: FontWeight.bold),
                             ),
                           ],

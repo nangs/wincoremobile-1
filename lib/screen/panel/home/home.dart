@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, must_be_immutable, sized_box_for_whitespace
+// ignore_for_file: prefer_const_literals_to_create_immutables, must_be_immutable, sized_box_for_whitespace, non_constant_identifier_names
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';

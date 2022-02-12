@@ -23,8 +23,6 @@ class Register extends StatefulWidget {
   State<Register> createState() => _RegisterState();
 }
 
-// final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
-
 class _RegisterState extends State<Register> {
   final _mobileNumberController = TextEditingController();
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -47,18 +45,11 @@ class _RegisterState extends State<Register> {
       setState(() {
         showLoading = false;
       });
-
-      // if (authCredential.user != null) {
-      //   Navigator.push(
-      //       context, MaterialPageRoute(builder: (context) => const Home()));
-      // }
     } on FirebaseAuthException catch (e) {
       setState(() {
         showLoading = false;
       });
 
-      // _scaffoldKey.currentState
-      //     .showSnackBar(SnackBar(content: Text(e.message)));
       print(e.message);
     }
   }
@@ -68,17 +59,6 @@ class _RegisterState extends State<Register> {
       onPressed: () async {
         var phoneNumber = int.tryParse(_mobileNumberController.text);
         if ((phoneNumber is int) == true) {
-          // context
-          //     .read<RegisterCubit>()
-          //     .sendOTP('+62' + _mobileNumberController.text);
-
-          // Navigator.of(context).push(
-          //   MaterialPageRoute(
-          //     builder: (context) =>
-          //         OTP(nomorHp: '+62' + _mobileNumberController.text),
-          //   ),
-          // );
-
           setState(() {
             showLoading = true;
             currentState = MobileVerificationState.sendOTPSTATE;
@@ -90,16 +70,11 @@ class _RegisterState extends State<Register> {
               setState(() {
                 showLoading = false;
               });
-              //signInWithPhoneAuthCredential(phoneAuthCredential);
             },
             verificationFailed: (verificationFailed) async {
               setState(() {
                 showLoading = false;
               });
-              // _scaffoldKey.currentState.showSnackBar(
-              //     SnackBar(content: Text(verificationFailed.message)));
-              // ScaffoldMessenger.of(context).showSnackBar(
-              //     SnackBar(content: Text(verificationFailed.message)));
               print(verificationFailed.message);
             },
             codeSent: (verificationId, resendingToken) async {
@@ -109,17 +84,20 @@ class _RegisterState extends State<Register> {
                 this.verificationId = verificationId;
               });
 
-              Navigator.push(
+              Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
                   builder: (context) => OTP(
                     nomorHp: '+62' + _mobileNumberController.text,
                     verificationId: verificationId,
+                    paramMenu: "Register",
                   ),
                 ),
               );
             },
-            codeAutoRetrievalTimeout: (verificationId) async {},
+            codeAutoRetrievalTimeout: (verificationId) async {
+              currentState = MobileVerificationState.inputPhoneNumberSTATE;
+            },
           );
         }
       },
@@ -239,6 +217,7 @@ class _RegisterState extends State<Register> {
                           fontWeight: FontWeight.bold,
                         ),
                         decoration: InputDecoration(
+                          labelText: 'Nomor Telepon',
                           enabledBorder: OutlineInputBorder(
                               borderSide:
                                   const BorderSide(color: Colors.black12),
@@ -257,11 +236,6 @@ class _RegisterState extends State<Register> {
                               ),
                             ),
                           ),
-                          // suffixIcon: const Icon(
-                          //   Icons.check_circle,
-                          //   color: Colors.green,
-                          //   size: 32,
-                          // ),
                         ),
                       ),
                       const SizedBox(

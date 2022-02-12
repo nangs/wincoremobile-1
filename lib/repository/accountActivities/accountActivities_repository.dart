@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_print, unnecessary_new
+// ignore_for_file: file_names, unnecessary_new, prefer_collection_literals, unnecessary_this, avoid_print
 
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';

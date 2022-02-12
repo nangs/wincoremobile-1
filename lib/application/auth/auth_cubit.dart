@@ -23,8 +23,8 @@ class AuthCubit extends Cubit<AuthState> {
 
       final _data = await _authRepository.signInUserWithUsernameAndPassword(
           token: _token.toString(), authRequest: authRequest);
-      //emit(AuthLoginSuccess(_data));
 
+      // l = left, r = right. left untuk error, right untuk yang gak error
       _data.fold((l) => emit(AuthError(l)), (r) => emit(AuthLoginSuccess(r)));
     } catch (e) {
       emit(AuthError(e.toString()));
