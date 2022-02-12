@@ -2,11 +2,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:wincoremobile/application/forgotPassword/cubit/forgot_password_cubit.dart';
+import 'package:wincoremobile/application/forgotPassword/cubit/forgot_password_validate_cubit.dart';
 import 'package:wincoremobile/domain/model/forgotPassword/forgotPassword_request.dart';
-import 'package:wincoremobile/helper/alert_message.dart';
 import 'package:wincoremobile/screen/auth/forgot_password/forgot_password_step2.dart';
 import 'package:wincoremobile/screen/auth/forgot_password/forgot_password_verification.dart';
+import 'package:wincoremobile/screen/auth/sign_in/sign_in.dart';
 
 class ForgotPasswordStep1 extends StatefulWidget {
   ForgotPasswordStep1({Key? key, required this.phone_no}) : super(key: key);
@@ -48,7 +48,7 @@ class _ForgotPasswordStep1State extends State<ForgotPasswordStep1> {
         );
 
         context
-            .read<ForgotPasswordCubit>()
+            .read<ForgotPasswordValidateCubit>()
             .forgotPasswordValidateData(forgotPasswordValidateRequest);
       },
       style: ButtonStyle(
@@ -70,8 +70,9 @@ class _ForgotPasswordStep1State extends State<ForgotPasswordStep1> {
         // resizeToAvoidBottomInset: false,
         backgroundColor: const Color(0xFF120A7C),
         body: BlocProvider(
-          create: (context) => ForgotPasswordCubit(),
-          child: BlocConsumer<ForgotPasswordCubit, ForgotPasswordState>(
+          create: (context) => ForgotPasswordValidateCubit(),
+          child: BlocConsumer<ForgotPasswordValidateCubit,
+              ForgotPasswordValidateState>(
             listener: (context, state) {
               if (state is ForgotPasswordErrorState) {
                 print(state.errorMsg);
@@ -80,7 +81,7 @@ class _ForgotPasswordStep1State extends State<ForgotPasswordStep1> {
               } else if (state is ForgotPasswordValidateSuccessState) {
                 print(state.forgotPasswordResponse);
                 if (state.forgotPasswordResponse.status == "VALIDATE_OK") {
-                  Navigator.of(context).push(
+                  Navigator.of(context).pushReplacement(
                     MaterialPageRoute(
                       builder: (context) => ForgotPasswordStep2(
                           phoneNo: widget.phone_no,
@@ -89,7 +90,7 @@ class _ForgotPasswordStep1State extends State<ForgotPasswordStep1> {
                   );
                 } else if (state.forgotPasswordResponse.status ==
                     "INVALID_PHONENUM") {
-                  Navigator.of(context).push(
+                  Navigator.of(context).pushReplacement(
                     MaterialPageRoute(
                       builder: (context) => ForgotPasswordVerification(
                         username: _usernameController.text,
@@ -98,7 +99,23 @@ class _ForgotPasswordStep1State extends State<ForgotPasswordStep1> {
                     ),
                   );
                 } else {
-                  alertLoginError(context);
+                  showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                        title: const Text("Informasi"),
+                        content: const Text(
+                            "Username atau Nomor Telepon yang kamu input salah"),
+                        actions: <Widget>[
+                          ElevatedButton(
+                            child: const Text('OK'),
+                            onPressed: () {
+                              Navigator.of(context).pushReplacement(
+                                  MaterialPageRoute(
+                                      builder: (context) => const SignIn()));
+                            },
+                          ),
+                        ]),
+                  );
                 }
               }
             },

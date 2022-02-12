@@ -11,7 +11,7 @@ class Welcome extends StatelessWidget {
       resizeToAvoidBottomInset: false,
       // backgroundColor: const Color(0xff120A7C),
 
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.deepPurple[900],
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 22, horizontal: 32),

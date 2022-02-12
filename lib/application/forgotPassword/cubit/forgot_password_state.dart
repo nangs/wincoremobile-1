@@ -9,19 +9,9 @@ class ForgotPasswordDetailInitialState extends ForgotPasswordState {}
 
 class ForgotPasswordLoadingState extends ForgotPasswordState {}
 
-class ForgotPasswordValidateSuccessState extends ForgotPasswordState {
-  final ForgotPasswordResponse forgotPasswordResponse;
-  ForgotPasswordValidateSuccessState(this.forgotPasswordResponse);
-}
-
 class ForgotPasswordVerifySuccessState extends ForgotPasswordState {
   final ForgotPasswordResponse forgotPasswordResponse;
   ForgotPasswordVerifySuccessState(this.forgotPasswordResponse);
-}
-
-class ForgotPasswordSuccessChangePasswordState extends ForgotPasswordState {
-  final ForgotPasswordResponse forgotPasswordResponse;
-  ForgotPasswordSuccessChangePasswordState(this.forgotPasswordResponse);
 }
 
 class ForgotPasswordErrorState extends ForgotPasswordState {

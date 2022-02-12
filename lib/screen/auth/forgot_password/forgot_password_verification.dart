@@ -6,7 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:wincoremobile/application/forgotPassword/cubit/forgot_password_cubit.dart';
 import 'package:wincoremobile/domain/model/forgotPassword/forgotPassword_request.dart';
 import 'package:wincoremobile/screen/auth/forgot_password/forgot_password_step2.dart';
-import 'package:wincoremobile/screen/auth/welcome.dart';
+import 'package:wincoremobile/screen/auth/sign_in/sign_in.dart';
 
 class ForgotPasswordVerification extends StatefulWidget {
   ForgotPasswordVerification(
@@ -52,7 +52,7 @@ class _ForgotPasswordVerificationState
           username: widget.username,
           phonenum: widget.phone_no,
           accountno: _noRekController.text,
-          birthdate: _dobController.text,
+          birthdate: _dobController.text.replaceAll("/", ""),
           identityno: _noKtpController.text,
           procedure: "VERIFY",
         );
@@ -123,9 +123,9 @@ class _ForgotPasswordVerificationState
                 print(state.errorMsg);
               } else if (state is ForgotPasswordLoadingState) {
                 print("Now is Loading");
-              } else if (state is ForgotPasswordValidateSuccessState) {
+              } else if (state is ForgotPasswordVerifySuccessState) {
                 print(state.forgotPasswordResponse);
-                if (state.forgotPasswordResponse.status == "VERIFY_OK") {
+                if (state.forgotPasswordResponse.status == "VERIFICATION_OK") {
                   Navigator.of(context).pushReplacement(
                     MaterialPageRoute(
                       builder: (context) => ForgotPasswordStep2(
@@ -144,8 +144,9 @@ class _ForgotPasswordVerificationState
                           ElevatedButton(
                             child: const Text('OK'),
                             onPressed: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => const Welcome()));
+                              Navigator.of(context).pushReplacement(
+                                  MaterialPageRoute(
+                                      builder: (context) => const SignIn()));
                             },
                           ),
                         ]),
@@ -259,7 +260,7 @@ class _ForgotPasswordVerificationState
                                       const TextStyle(color: Colors.blueGrey),
                                   suffixIcon: IconButton(
                                     onPressed: _pickDateDialog,
-                                    color: Colors.white,
+                                    color: Colors.blue,
                                     icon: const Icon(Icons.date_range),
                                   ),
                                   labelText: 'Tanggal Lahir',
