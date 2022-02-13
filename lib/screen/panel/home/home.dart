@@ -12,10 +12,15 @@ import 'package:wincoremobile/screen/panel/settings/faq.dart';
 import 'package:wincoremobile/screen/panel/settings/settings.dart';
 
 class Home extends StatefulWidget {
-  Home({Key? key, required this.username, required this.no_rek})
+  Home(
+      {Key? key,
+      required this.username,
+      required this.no_rek,
+      required this.userid})
       : super(key: key);
   String username;
   String no_rek;
+  String userid;
   @override
   _HomeState createState() => _HomeState();
 }
@@ -91,6 +96,7 @@ class _HomeState extends State<Home> {
                     builder: (context) => Settings(
                           noRek: widget.no_rek,
                           username: widget.username,
+                          userid: widget.userid,
                         ))),
               },
             ),
@@ -361,6 +367,7 @@ class _HomeState extends State<Home> {
                                       builder: (context) => Settings(
                                             noRek: widget.no_rek,
                                             username: widget.no_rek,
+                                            userid: widget.userid,
                                           )));
                                 },
                                 child: Column(

@@ -48,6 +48,7 @@ class _SignInState extends State<SignIn> {
                     Navigator.of(context).pushReplacement(
                       MaterialPageRoute(
                         builder: (context) => Home(
+                          userid: _userController.text,
                           username: username.toString(),
                           no_rek: noRek.toString(),
                         ),

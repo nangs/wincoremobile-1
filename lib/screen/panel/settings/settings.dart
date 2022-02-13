@@ -8,11 +8,16 @@ import 'package:wincoremobile/screen/auth/sign_in/sign_in.dart';
 import 'package:wincoremobile/helper/icon_with_label.dart';
 
 class Settings extends StatefulWidget {
-  Settings({Key? key, required this.noRek, required this.username})
+  Settings(
+      {Key? key,
+      required this.noRek,
+      required this.username,
+      required this.userid})
       : super(key: key);
 
   String noRek;
   String username;
+  String userid;
   @override
   _SettingsState createState() => _SettingsState();
 }
@@ -58,6 +63,7 @@ class _SettingsState extends State<Settings> {
                         builder: (context) => ForgotMPin(
                               noRek: widget.noRek,
                               username: widget.username,
+                              userid: widget.userid,
                             )));
                   },
                   child: const HorizontalFlatMenuWithIcon(

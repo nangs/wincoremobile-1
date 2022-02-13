@@ -1,27 +1,29 @@
-// ignore_for_file: avoid_print, unnecessary_new
+// ignore_for_file: unnecessary_new, prefer_collection_literals, unnecessary_this, file_names, avoid_print
+
+import 'dart:convert';
 
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:wincoremobile/domain/model/auth/auth_request.dart';
-import 'package:wincoremobile/domain/model/auth/auth_response.dart';
+import 'package:wincoremobile/domain/model/forgotMPin/forgotMPin_request.dart';
+import 'package:wincoremobile/domain/model/forgotMPin/forgotMPin_response.dart';
 
-class AuthRepository {
+class ForgotMPinRepository {
   final Dio _dio = Dio();
 
-  Future<Either<String, AuthResponse>> signInUserWithUsernameAndPassword({
+  Future<Either<String, ForgotMPinResponse>> verificationDataForgotMPin({
     required String token,
-    required AuthRequest authRequest,
+    required ForgotMPinRequest forgotMPinRequest,
   }) async {
     Response _response;
-    // Response _tokenResponse;
 
     try {
       print("tokennya : " + token);
-      print("json : " + authRequest.toJson().toString());
+      print("json : " + forgotMPinRequest.toJson().toString());
 
       _response = await _dio.post(
-        "https://103.2.146.173:8443/mobileservice/Login",
-        data: {"message": authRequest.toJson().toString()},
+        "https://103.2.146.173:8443/mobileservice/ForgotPIN",
+        data:
+            jsonDecode(jsonEncode({"message": jsonEncode(forgotMPinRequest)})),
         options: Options(
           contentType: Headers.formUrlEncodedContentType,
           method: 'POST',
@@ -29,7 +31,8 @@ class AuthRepository {
         ),
       );
 
-      AuthResponse authResponse = AuthResponse.fromJson(_response.data);
+      ForgotMPinResponse authResponse =
+          ForgotMPinResponse.fromJson(_response.data);
       print(authResponse.status);
 
       //right itu untuk sukses
