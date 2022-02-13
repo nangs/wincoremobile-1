@@ -2,6 +2,7 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 // import 'package:wincoremobile/screen/panel/home/home.dart';
 import 'package:wincoremobile/helper/otp.dart';
 
@@ -212,6 +213,9 @@ class _RegisterState extends State<Register> {
                       TextFormField(
                         controller: _mobileNumberController,
                         keyboardType: TextInputType.number,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.allow(RegExp('[0-9]'))
+                        ],
                         style: const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,

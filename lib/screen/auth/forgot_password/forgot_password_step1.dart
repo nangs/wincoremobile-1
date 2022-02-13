@@ -2,6 +2,7 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 // import 'package:wincoremobile/screen/panel/home/home.dart';
 import 'package:wincoremobile/helper/otp.dart';
 
@@ -220,6 +221,9 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                     children: [
                       TextFormField(
                         controller: _mobileNumberController,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.allow(RegExp('[0-9]'))
+                        ],
                         keyboardType: TextInputType.number,
                         style: const TextStyle(
                           fontSize: 18,

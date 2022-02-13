@@ -1,6 +1,7 @@
 // ignore_for_file: avoid_print, must_be_immutable, non_constant_identifier_names
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:wincoremobile/application/forgotPassword/cubit/forgot_password_cubit.dart';
@@ -229,6 +230,10 @@ class _ForgotPasswordVerificationState
                               TextFormField(
                                 controller: _noRekController,
                                 keyboardType: TextInputType.number,
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.allow(
+                                      RegExp('[0-9]'))
+                                ],
                                 style: const TextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.bold,
@@ -284,6 +289,10 @@ class _ForgotPasswordVerificationState
                               ),
                               TextFormField(
                                 controller: _noKtpController,
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.allow(
+                                      RegExp('[0-9]'))
+                                ],
                                 keyboardType: TextInputType.number,
                                 style: const TextStyle(
                                   fontSize: 18,

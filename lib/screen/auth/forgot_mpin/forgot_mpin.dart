@@ -261,6 +261,10 @@ class _ForgotMPinState extends State<ForgotMPin> {
                                         const BorderSide(color: Colors.black12),
                                     borderRadius: BorderRadius.circular(10)),
                               ),
+                              inputFormatters: [
+                                FilteringTextInputFormatter.allow(
+                                    RegExp('[0-9]'))
+                              ],
                             ),
                             const SizedBox(
                               height: 8,

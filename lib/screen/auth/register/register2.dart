@@ -239,10 +239,6 @@ class _Register2State extends State<Register2> {
                           labelText: 'Tanggal Lahir',
                           labelStyle: const TextStyle(color: Colors.blueAccent),
                         ),
-                        // keyboardType: TextInputType.datetime,
-                        // inputFormatters: [
-                        //   FilteringTextInputFormatter.singleLineFormatter
-                        // ],
                         readOnly: true,
                       ),
                       TextField(
@@ -257,7 +253,7 @@ class _Register2State extends State<Register2> {
                         ),
                         keyboardType: TextInputType.number,
                         inputFormatters: [
-                          FilteringTextInputFormatter.digitsOnly
+                          FilteringTextInputFormatter.allow(RegExp('[0-9]'))
                         ],
                       ),
                       TextField(
@@ -272,7 +268,7 @@ class _Register2State extends State<Register2> {
                         ),
                         keyboardType: TextInputType.number,
                         inputFormatters: [
-                          FilteringTextInputFormatter.digitsOnly
+                          FilteringTextInputFormatter.allow(RegExp('[0-9]'))
                         ],
                       ),
                       TextField(
@@ -346,7 +342,8 @@ class _Register2State extends State<Register2> {
                         ),
                         keyboardType: TextInputType.number,
                         inputFormatters: [
-                          FilteringTextInputFormatter.digitsOnly
+                          LengthLimitingTextInputFormatter(6),
+                          FilteringTextInputFormatter.allow(RegExp('[0-9]'))
                         ],
                       ),
                       TextField(
@@ -361,7 +358,8 @@ class _Register2State extends State<Register2> {
                         ),
                         keyboardType: TextInputType.number,
                         inputFormatters: [
-                          FilteringTextInputFormatter.digitsOnly
+                          LengthLimitingTextInputFormatter(6),
+                          FilteringTextInputFormatter.allow(RegExp('[0-9]'))
                         ],
                         onChanged: (context) {
                           if (_mpinController.text !=
