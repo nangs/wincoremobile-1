@@ -1,12 +1,18 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:wincoremobile/screen/auth/change_mpin/change_mpin.dart';
 import 'package:wincoremobile/screen/auth/change_password/change_password.dart';
+import 'package:wincoremobile/screen/auth/forgot_mpin/forgot_mpin.dart';
 import 'package:wincoremobile/screen/auth/sign_in/sign_in.dart';
 import 'package:wincoremobile/helper/icon_with_label.dart';
 
 class Settings extends StatefulWidget {
-  const Settings({Key? key}) : super(key: key);
+  Settings({Key? key, required this.noRek, required this.username})
+      : super(key: key);
 
+  String noRek;
+  String username;
   @override
   _SettingsState createState() => _SettingsState();
 }
@@ -22,39 +28,55 @@ class _SettingsState extends State<Settings> {
       resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: SingleChildScrollView(
-          child: Column(
-            children: [
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const ChangePassword()));
-                },
-                child: const HorizontalFlatMenuWithIcon(
-                  nameMenu: 'Ubah Kata Sandi',
-                  icon: Icons.lock_open_sharp,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const ChangePassword()));
+                  },
+                  child: const HorizontalFlatMenuWithIcon(
+                    nameMenu: 'Ubah Kata Sandi',
+                    icon: Icons.lock_open_sharp,
+                  ),
                 ),
-              ),
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const ChangeMPin()));
-                },
-                child: const HorizontalFlatMenuWithIcon(
-                  nameMenu: 'Ubah M-PIN',
-                  icon: Icons.password_sharp,
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const ChangeMPin()));
+                  },
+                  child: const HorizontalFlatMenuWithIcon(
+                    nameMenu: 'Ubah M-PIN',
+                    icon: Icons.password_sharp,
+                  ),
                 ),
-              ),
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => const SignIn()));
-                },
-                child: const HorizontalFlatMenuWithIcon(
-                  nameMenu: 'Keluar',
-                  icon: Icons.exit_to_app_sharp,
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => ForgotMPin(
+                              noRek: widget.noRek,
+                              username: widget.username,
+                            )));
+                  },
+                  child: const HorizontalFlatMenuWithIcon(
+                    nameMenu: 'Lupa M-PIN',
+                    icon: Icons.password_sharp,
+                  ),
                 ),
-              ),
-            ],
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+                        builder: (context) => const SignIn()));
+                  },
+                  child: const HorizontalFlatMenuWithIcon(
+                    nameMenu: 'Keluar',
+                    icon: Icons.exit_to_app_sharp,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

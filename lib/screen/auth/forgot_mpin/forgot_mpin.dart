@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:wincoremobile/screen/auth/welcome.dart';
 
 class ForgotMPin extends StatefulWidget {
-  const ForgotMPin({Key? key}) : super(key: key);
+  ForgotMPin({Key? key, required this.noRek, required this.username})
+      : super(key: key);
+
+  String noRek;
+  String username;
 
   @override
   State<ForgotMPin> createState() => _ForgotMPinState();

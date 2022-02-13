@@ -87,8 +87,11 @@ class _HomeState extends State<Home> {
               leading: const Icon(Icons.settings),
               title: const Text('Settings'),
               onTap: () => {
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => const Settings())),
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => Settings(
+                          noRek: widget.no_rek,
+                          username: widget.username,
+                        ))),
               },
             ),
           ],
@@ -355,7 +358,10 @@ class _HomeState extends State<Home> {
                               child: InkWell(
                                 onTap: () {
                                   Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (context) => const Settings()));
+                                      builder: (context) => Settings(
+                                            noRek: widget.no_rek,
+                                            username: widget.no_rek,
+                                          )));
                                 },
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
