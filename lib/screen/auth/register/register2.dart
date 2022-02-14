@@ -196,7 +196,13 @@ class _Register2State extends State<Register2> {
                         ),
                       ]),
                 );
-              } else if (state.dataLogin.status == "REGISTER_EXIST") {
+              } else if (state.dataLogin.status == "REGISTER_ACCOUNTNO_EXIST") {
+                AlertMessage(
+                    "Informasi",
+                    "Nomor Rekening anda sudah terdaftar, hubungi Customer Service 12345 untuk info lebih lanjut",
+                    "OK",
+                    context);
+              } else if (state.dataLogin.status == "REGISTER_USERNAME_EXIST") {
                 AlertMessage(
                     "Informasi", "Username telah digunakan", "OK", context);
               } else if (state.dataLogin.status == "INVALID_ACCOUNT_NO") {

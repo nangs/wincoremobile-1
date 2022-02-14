@@ -1,17 +1,18 @@
 // ignore_for_file: file_names, unnecessary_new, prefer_collection_literals, unnecessary_this, avoid_print
 
+import 'dart:convert';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:wincoremobile/domain/model/auth/auth_request.dart';
-import 'package:wincoremobile/domain/model/auth/auth_response.dart';
+import 'package:wincoremobile/domain/model/accountInformation/accInformation_request.dart';
+import 'package:wincoremobile/domain/model/accountInformation/accInformation_response.dart';
 
 class AccountBalanceRepository {
   final Dio _dio = Dio();
 
   // Future<>
-  Future<Either<String, AuthResponse>> getCurrentBalance({
+  Future<Either<String, AccountInfoResponse>> getCurrentBalance({
     required String token,
-    required AuthRequest authRequest,
+    required AccountInfoRequest accountInfoRequest,
   }) async {
     Response _response;
     // Response _tokenResponse;
@@ -23,11 +24,12 @@ class AccountBalanceRepository {
       // };
 
       print("tokennya : " + token);
-      print("json : " + authRequest.toJson().toString());
+      print("json : " + accountInfoRequest.toJson().toString());
 
       _response = await _dio.post(
-        "https://103.2.146.173:8443/mobileservice/getBalance",
-        data: {"message": authRequest.toJson().toString()},
+        "https://103.2.146.173:8443/mobileservice/AccountInfo",
+        data:
+            jsonDecode(jsonEncode({"message": jsonEncode(accountInfoRequest)})),
         options: Options(
           contentType: Headers.formUrlEncodedContentType,
           method: 'POST',
@@ -35,7 +37,8 @@ class AccountBalanceRepository {
         ),
       );
 
-      AuthResponse authResponse = AuthResponse.fromJson(_response.data);
+      AccountInfoResponse authResponse =
+          AccountInfoResponse.fromJson(_response.data);
       print(authResponse.status);
 
       //right itu untuk sukses

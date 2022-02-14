@@ -1,10 +1,14 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, must_be_immutable, sized_box_for_whitespace, non_constant_identifier_names
+// ignore_for_file: prefer_const_literals_to_create_immutables, must_be_immutable, sized_box_for_whitespace, non_constant_identifier_names, unnecessary_new, prefer_const_constructors
+
+import 'dart:io';
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:wincoremobile/helper/modal.dart';
 import 'package:wincoremobile/screen/panel/account/account_activities.dart';
-import 'package:wincoremobile/screen/panel/account/account_balance.dart';
+// import 'package:wincoremobile/screen/panel/account/account_balance.dart';
 import 'package:wincoremobile/screen/panel/account/transfer_balance.dart';
 import 'package:wincoremobile/screen/panel/notification/notifications.dart';
 import 'package:wincoremobile/screen/panel/settings/about.dart';
@@ -185,11 +189,11 @@ class _HomeState extends State<Home> {
                                   borderRadius: BorderRadius.circular(8.0)),
                               child: InkWell(
                                 onTap: () {
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (context) => AccountBalance(
-                                            nama: widget.username,
-                                            no_rek: widget.no_rek,
-                                          )));
+                                  M_PIN_AccInfoModalDialog(
+                                      context,
+                                      widget.username,
+                                      widget.userid,
+                                      widget.no_rek);
                                 },
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -295,8 +299,7 @@ class _HomeState extends State<Home> {
                                   borderRadius: BorderRadius.circular(8.0)),
                               child: InkWell(
                                 onTap: () {
-                                  // Navigator.of(context).push(MaterialPageRoute(
-                                  //     builder: (context) => Settings()));
+                                  modalBottomSheetPembayaran(context);
                                 },
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -328,16 +331,16 @@ class _HomeState extends State<Home> {
                                   borderRadius: BorderRadius.circular(8.0)),
                               child: InkWell(
                                 onTap: () {
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (context) => const FAQ()));
+                                  // Navigator.of(context).push(MaterialPageRoute(
+                                  //     builder: (context) => const FAQ()));
+                                  openwhatsapp();
                                 },
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: <Widget>[
-                                    const Icon(
-                                      Icons.question_answer,
-                                      size: 30,
+                                    const FaIcon(
+                                      FontAwesomeIcons.headset,
                                     ),
                                     const SizedBox(height: 20),
                                     const Text(
@@ -366,7 +369,7 @@ class _HomeState extends State<Home> {
                                   Navigator.of(context).push(MaterialPageRoute(
                                       builder: (context) => Settings(
                                             noRek: widget.no_rek,
-                                            username: widget.no_rek,
+                                            username: widget.username,
                                             userid: widget.userid,
                                           )));
                                 },
@@ -401,5 +404,30 @@ class _HomeState extends State<Home> {
         ),
       ),
     );
+  }
+
+  openwhatsapp() async {
+    var whatsapp = "+6281299198070";
+    var whatsappURl_android =
+        "whatsapp://send?phone=" + whatsapp + "&text=Halo WBK";
+    var whatappURL_ios =
+        "https://wa.me/$whatsapp?text=${Uri.parse("Halo WBK")}";
+    if (Platform.isIOS) {
+      // for iOS phone only
+      if (await canLaunch(whatappURL_ios)) {
+        await launch(whatappURL_ios, forceSafariVC: false);
+      } else {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: new Text("whatsapp no installed")));
+      }
+    } else {
+      // android , web
+      if (await canLaunch(whatsappURl_android)) {
+        await launch(whatsappURl_android);
+      } else {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: new Text("whatsapp no installed")));
+      }
+    }
   }
 }
