@@ -1,42 +1,38 @@
 // ignore_for_file: file_names, prefer_collection_literals, unnecessary_new, unnecessary_this
 
 class AccountActivitiesRequest {
-  String? accessToken;
-  String? traceNo;
-  String? accessId;
-  String? accountNo;
-  String? tanggalAwal;
-  String? tanggalAkhir;
-  int? sequenceNo;
+  String? username;
+  String? accountno;
+  String? mpin;
+  String? startdate;
+  String? enddate;
+  String? sequenceno;
 
   AccountActivitiesRequest(
-      {this.accessToken,
-      this.traceNo,
-      this.accessId,
-      this.accountNo,
-      this.tanggalAwal,
-      this.tanggalAkhir,
-      this.sequenceNo});
+      {this.username,
+      this.accountno,
+      this.mpin,
+      this.startdate,
+      this.enddate,
+      this.sequenceno});
 
   AccountActivitiesRequest.fromJson(Map<String, dynamic> json) {
-    accessToken = json['access_token'];
-    traceNo = json['trace_no'];
-    accessId = json['access_id'];
-    accountNo = json['account_no'];
-    tanggalAwal = json['tanggal_awal'];
-    tanggalAkhir = json['tanggal_akhir'];
-    sequenceNo = json['sequence_no'];
+    username = json['username'];
+    accountno = json['accountno'];
+    mpin = json['mpin'];
+    startdate = json['startdate'];
+    enddate = json['enddate'];
+    sequenceno = json['sequenceno'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['access_token'] = this.accessToken;
-    data['trace_no'] = this.traceNo;
-    data['access_id'] = this.accessId;
-    data['account_no'] = this.accountNo;
-    data['tanggal_awal'] = this.tanggalAwal;
-    data['tanggal_akhir'] = this.tanggalAkhir;
-    data['sequence_no'] = this.sequenceNo;
+    data['username'] = this.username;
+    data['accountno'] = this.accountno;
+    data['mpin'] = this.mpin;
+    data['startdate'] = this.startdate;
+    data['enddate'] = this.enddate;
+    data['sequenceno'] = this.sequenceno;
     return data;
   }
 }

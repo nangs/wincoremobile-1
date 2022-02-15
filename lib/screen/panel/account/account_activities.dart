@@ -4,11 +4,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:wincoremobile/helper/alert_message.dart';
+import 'package:wincoremobile/helper/modal.dart';
 import 'package:wincoremobile/screen/panel/account/account_activities_detail.dart';
 
 class AccountActivities extends StatefulWidget {
-  AccountActivities({Key? key, required this.no_rek}) : super(key: key);
+  AccountActivities(
+      {Key? key,
+      required this.no_rek,
+      required this.userid,
+      required this.username})
+      : super(key: key);
 
+  String username;
+  String userid;
   String no_rek;
   @override
   State<AccountActivities> createState() => _AccountActivitiesState();
@@ -80,6 +88,7 @@ class _AccountActivitiesState extends State<AccountActivities> {
                           SizedBox(
                             width: 150,
                             child: TextField(
+                              readOnly: true,
                               controller: _startDateController,
                               style: const TextStyle(
                                 // fontSize: 18.0,
@@ -106,6 +115,7 @@ class _AccountActivitiesState extends State<AccountActivities> {
                           SizedBox(
                             width: 150,
                             child: TextField(
+                              readOnly: true,
                               controller: _endDateController,
                               style: const TextStyle(
                                 // fontSize: 18.0,
@@ -164,39 +174,36 @@ class _AccountActivitiesState extends State<AccountActivities> {
                               _endDateController.text.isNotEmpty) {
                             var today = DateTime.now();
 
-                            if (today.difference(_selectedStartDate).inDays >
-                                    31 ||
-                                today.difference(_selectedEndDate).inDays >
-                                    31) {
-                              AlertMessage(
-                                  "Informasi",
-                                  "Mutasi Rekening yang dipilih Maksimal 31 Hari kebelakang",
-                                  "OK",
-                                  context);
-                            } else {
-                              if (_selectedEndDate
-                                      .difference(_selectedStartDate)
-                                      .inDays >
-                                  7) {
-                                AlertMessage(
-                                    "Informasi",
-                                    "Mutasi Rekening yang ditampilkan Maksimal 7 hari",
-                                    "OK",
-                                    context);
-                              } else {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        AccountActivitiesDetails(
-                                      startDate: _startDateController.text,
-                                      endDate: _endDateController.text,
-                                      no_rek: _noRekController.text,
-                                    ),
-                                  ),
-                                );
-                              }
-                            }
+                            // if (today.difference(_selectedStartDate).inDays >
+                            //         31 ||
+                            //     today.difference(_selectedEndDate).inDays >
+                            //         31) {
+                            //   AlertMessage(
+                            //       "Informasi",
+                            //       "Mutasi Rekening yang dipilih Maksimal 31 Hari kebelakang",
+                            //       "OK",
+                            //       context);
+                            // } else {
+                            // if (_selectedEndDate
+                            //         .difference(_selectedStartDate)
+                            //         .inDays >
+                            //     7) {
+                            //   AlertMessage(
+                            //       "Informasi",
+                            //       "Mutasi Rekening yang ditampilkan Maksimal 7 hari",
+                            //       "OK",
+                            //       context);
+                            // } else {
+                            M_PIN_AccActivitiesModalDialog(
+                                context,
+                                widget.username,
+                                widget.userid,
+                                widget.no_rek,
+                                _startDateController.text,
+                                _endDateController.text,
+                                "1");
+                            // }
+                            // }
                           } else {
                             AlertMessage(
                                 "Informasi",

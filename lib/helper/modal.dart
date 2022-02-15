@@ -4,9 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:wincoremobile/application/accountActivities/cubit/acc_activities_cubit.dart';
 import 'package:wincoremobile/application/accountBalance/cubit/account_balance_cubit.dart';
+import 'package:wincoremobile/domain/model/accountActivities/accActivities_request.dart';
 import 'package:wincoremobile/domain/model/accountInformation/accInformation_request.dart';
 import 'package:wincoremobile/helper/alert_message.dart';
+import 'package:wincoremobile/screen/panel/account/account_activities_detail.dart';
 import 'package:wincoremobile/screen/panel/account/account_balance.dart';
 
 Future<dynamic> modalBottomSheetPembayaran(BuildContext context) {
@@ -464,6 +467,112 @@ Future<dynamic> M_PIN_AccInfoModalDialog(
                               context
                                   .read<AccountBalanceCubit>()
                                   .getAccountInfo(accInfoRequest);
+                            },
+                          )
+                        ],
+                      ),
+                    ),
+                  ],
+                );
+              },
+            ),
+          ),
+        );
+      });
+}
+
+Future<dynamic> M_PIN_AccActivitiesModalDialog(
+    BuildContext context,
+    String username,
+    String userid,
+    String accountNo,
+    String startDate,
+    String endDate,
+    String seqNo) {
+  final _MPINController = TextEditingController();
+  return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text(
+            "M-PIN",
+            textAlign: TextAlign.center,
+          ),
+          content: BlocProvider(
+            create: (context) => AccActivitiesCubit(),
+            child: BlocConsumer<AccActivitiesCubit, AccActivitiesState>(
+              listener: (context, state) {
+                if (state is AccActivitiesLoading) {
+                  print("Now is loading..");
+                } else if (state is AccActivitiesError) {
+                  print(state.errorMsg);
+                } else if (state is AccActivitiesSuccess) {
+                  if (state.accActivitiesResponse.status == "OK") {
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+                        builder: (context) => AccountActivitiesDetails(
+                            response: state.accActivitiesResponse,
+                            username: username,
+                            noRek: accountNo,
+                            startDate: startDate,
+                            endDate: endDate,
+                            userid: userid,
+                            mpin: _MPINController.text)));
+                    // print(state.accActivitiesResponse.status.toString());
+                    // print(state.accActivitiesResponse.info?.eof.toString());
+                    // print(state.accActivitiesResponse.info?.sequenceNo.toString());
+                    // print(state.accActivitiesResponse.info?.mutasi?.toList().toString());
+                  } else {
+                    AlertMessage("Informasi", "PIN Salah", "OK", context);
+                  }
+                }
+              },
+              builder: (context, state) {
+                return Stack(
+                  children: <Widget>[
+                    Form(
+                      // key: _formKey,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: <Widget>[
+                          TextFormField(
+                            controller: _MPINController,
+                            keyboardType: TextInputType.number,
+                            style: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            inputFormatters: [
+                              LengthLimitingTextInputFormatter(6),
+                              FilteringTextInputFormatter.allow(RegExp('[0-9]'))
+                            ],
+                            obscureText: true,
+                            decoration: InputDecoration(
+                              labelText: 'M-PIN',
+                              enabledBorder: OutlineInputBorder(
+                                  borderSide:
+                                      const BorderSide(color: Colors.black12),
+                                  borderRadius: BorderRadius.circular(10)),
+                              focusedBorder: OutlineInputBorder(
+                                  borderSide:
+                                      const BorderSide(color: Colors.black12),
+                                  borderRadius: BorderRadius.circular(10)),
+                            ),
+                          ),
+                          ElevatedButton(
+                            child: const Text("Submit"),
+                            onPressed: () {
+                              final accActivitiesRequest =
+                                  AccountActivitiesRequest(
+                                      accountno: accountNo,
+                                      username: userid,
+                                      mpin: _MPINController.text,
+                                      enddate: endDate,
+                                      startdate: startDate,
+                                      sequenceno: seqNo);
+
+                              context
+                                  .read<AccActivitiesCubit>()
+                                  .getAccountInfo(accActivitiesRequest);
                             },
                           )
                         ],

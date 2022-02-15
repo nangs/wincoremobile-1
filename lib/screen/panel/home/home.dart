@@ -227,9 +227,15 @@ class _HomeState extends State<Home> {
                                   borderRadius: BorderRadius.circular(8.0)),
                               child: InkWell(
                                 onTap: () {
-                                  Navigator.of(context).push(MaterialPageRoute(
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
                                       builder: (context) => AccountActivities(
-                                          no_rek: widget.no_rek)));
+                                        username: widget.username,
+                                        userid: widget.userid,
+                                        no_rek: widget.no_rek,
+                                      ),
+                                    ),
+                                  );
                                 },
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,

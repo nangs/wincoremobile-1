@@ -1,33 +1,28 @@
 // ignore_for_file: file_names, unnecessary_new, prefer_collection_literals, unnecessary_this, avoid_print
 
+import 'dart:convert';
+
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:wincoremobile/domain/model/auth/auth_request.dart';
-import 'package:wincoremobile/domain/model/auth/auth_response.dart';
+import 'package:wincoremobile/domain/model/accountActivities/accActivities_request.dart';
+import 'package:wincoremobile/domain/model/accountActivities/accActivities_response.dart';
 
 class AccountActivitiesRepository {
   final Dio _dio = Dio();
 
-  // Future<>
-  Future<Either<String, AuthResponse>> getAccountActivities({
+  Future<Either<String, AccountActivitiesResponse>> getAccountActivities({
     required String token,
-    required AuthRequest authRequest,
+    required AccountActivitiesRequest accountActivitiesRequest,
   }) async {
     Response _response;
-    // Response _tokenResponse;
-
     try {
-      // Map<String, dynamic> requestData = {
-      //   "username": username,
-      //   "password": password,
-      // };
-
       print("tokennya : " + token);
-      print("json : " + authRequest.toJson().toString());
+      print("json : " + accountActivitiesRequest.toJson().toString());
 
       _response = await _dio.post(
-        "https://103.2.146.173:8443/mobileservice/getAccountActivities",
-        data: {"message": authRequest.toJson().toString()},
+        "https://103.2.146.173:8443/mobileservice/AccountActivity",
+        data: jsonDecode(
+            jsonEncode({"message": jsonEncode(accountActivitiesRequest)})),
         options: Options(
           contentType: Headers.formUrlEncodedContentType,
           method: 'POST',
@@ -35,11 +30,14 @@ class AccountActivitiesRepository {
         ),
       );
 
-      AuthResponse authResponse = AuthResponse.fromJson(_response.data);
-      print(authResponse.status);
+      AccountActivitiesResponse accountActivitiesResponse =
+          AccountActivitiesResponse.fromJson(_response.data);
+      Mutasi mutasi = Mutasi.fromJson(_response.data['mutasi']);
+      print(accountActivitiesResponse);
+      print(mutasi);
 
       //right itu untuk sukses
-      return right(authResponse);
+      return right(accountActivitiesResponse);
     } on DioError catch (e) {
       print("status code : ");
       print(e.response?.statusCode);
