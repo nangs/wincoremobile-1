@@ -1,5 +1,7 @@
 // ignore_for_file: avoid_print, unnecessary_new
 
+import 'dart:convert';
+
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:wincoremobile/domain/model/auth/auth_request.dart';
@@ -21,7 +23,7 @@ class AuthRepository {
 
       _response = await _dio.post(
         "https://103.2.146.173:8443/mobileservice/Login",
-        data: {"message": authRequest.toJson().toString()},
+        data: jsonDecode(jsonEncode({"message": jsonEncode(authRequest)})),
         options: Options(
           contentType: Headers.formUrlEncodedContentType,
           method: 'POST',
