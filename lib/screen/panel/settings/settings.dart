@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:wincoremobile/screen/auth/change_mpin/change_mpin.dart';
-import 'package:wincoremobile/screen/auth/change_password/change_password.dart';
+import 'package:wincoremobile/screen/auth/change_password/changes_password.dart';
 import 'package:wincoremobile/screen/auth/forgot_mpin/forgot_mpin.dart';
 import 'package:wincoremobile/screen/auth/sign_in/sign_in.dart';
 import 'package:wincoremobile/helper/icon_with_label.dart';
@@ -40,7 +40,11 @@ class _SettingsState extends State<Settings> {
                 ElevatedButton(
                   onPressed: () {
                     Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const ChangePassword()));
+                        builder: (context) => ChangePassword(
+                              noRek: widget.noRek,
+                              username: widget.username,
+                              userid: widget.userid,
+                            )));
                   },
                   child: const HorizontalFlatMenuWithIcon(
                     nameMenu: 'Ubah Kata Sandi',
@@ -50,7 +54,11 @@ class _SettingsState extends State<Settings> {
                 ElevatedButton(
                   onPressed: () {
                     Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const ChangeMPin()));
+                        builder: (context) => ChangeMPIN(
+                              noRek: widget.noRek,
+                              username: widget.username,
+                              userid: widget.userid,
+                            )));
                   },
                   child: const HorizontalFlatMenuWithIcon(
                     nameMenu: 'Ubah M-PIN',
