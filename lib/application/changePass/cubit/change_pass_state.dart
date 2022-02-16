@@ -1,4 +1,4 @@
-part of 'changes_pass_cubit.dart';
+part of 'change_pass_cubit.dart';
 
 @immutable
 abstract class ChangesPassState {}

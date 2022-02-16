@@ -1,140 +1,189 @@
-// ignore_for_file: avoid_print
-
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:wincoremobile/domain/model/token_response.dart';
-// import 'package:wincoremobile/repository/token_repository.dart';
-// import 'package:wincoremobile/screen/panel/home/home.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:wincoremobile/domain/model/changeMPIN/changeMPIN_request.dart';
+import 'package:wincoremobile/application/changeMPIN/cubit/change_mpin_cubit.dart';
+import 'package:wincoremobile/screen/panel/home/home.dart';
 
-class ChangeMPin extends StatefulWidget {
-  const ChangeMPin({Key? key}) : super(key: key);
+// ignore: must_be_immutable
+class ChangeMPIN extends StatefulWidget {
+  ChangeMPIN({
+    Key? key,
+    required this.noRek,
+    required this.username,
+    required this.userid,
+  }) : super(key: key);
 
+  String noRek;
+  String username;
+  String userid;
   @override
-  State<ChangeMPin> createState() => _ChangeMPinState();
+  State<ChangeMPIN> createState() => _ChangeMPINState();
 }
 
-class _ChangeMPinState extends State<ChangeMPin> {
+class _ChangeMPINState extends State<ChangeMPIN> {
   final myPhoneNumberController = TextEditingController();
-
-  final myAccountNumberController = TextEditingController();
-
-  final myPasswordController = TextEditingController();
-
-  final myPassword2Controller = TextEditingController();
-
-  late String nPhoneNumber, nMPIN1, nAccountNumber = '', nMPIN2 = '';
-
-  //tambahkan form
-  final _formKey = GlobalKey<FormState>();
+  final myRekeningController = TextEditingController();
+  final myOldMPINController = TextEditingController();
+  final myNewMPINController = TextEditingController();
+  final myReMPINController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: const Text('Ubah M-PIN'),
+        title: const Text("Change MPIN"),
         backgroundColor: const Color(0xff120A7C),
       ),
-      body: SafeArea(
-        key: _formKey,
-        child: SingleChildScrollView(
-          child: Column(
-            children: <Widget>[
-              Container(
-                  margin: const EdgeInsets.all(10),
-                  child: TextField(
-                    style: const TextStyle(fontSize: 18.0),
-                    controller: myPhoneNumberController,
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Nomor Telepon',
-                    ),
-                    onChanged: (text) {
-                      nPhoneNumber = text;
-                    },
-                  )),
-              Container(
-                  margin: const EdgeInsets.all(10),
-                  child: TextField(
-                    style: const TextStyle(fontSize: 18.0),
-                    controller: myAccountNumberController,
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Nomor Rekening',
-                    ),
-                    onChanged: (text) {
-                      nAccountNumber = text;
-                    },
-                  )),
-              Container(
-                  margin: const EdgeInsets.all(10),
-                  child: TextField(
-                    style: const TextStyle(fontSize: 18.0),
-                    obscureText: true,
-                    controller: myPasswordController,
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'M-PIN Baru',
-                    ),
-                    onChanged: (text) {
-                      nMPIN1 = text;
-                    },
-                  )),
-              Container(
-                  margin: const EdgeInsets.all(10),
-                  child: TextField(
-                    style: const TextStyle(fontSize: 18.0),
-                    obscureText: true,
-                    controller: myPassword2Controller,
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Ketik Ulang M-PIN Baru',
-                    ),
-                    onChanged: (text) {
-                      nMPIN2 = text;
-                    },
-                  )),
-              const SizedBox(
-                height: 25.0,
-              ),
-              MaterialButton(
-                minWidth: 180.0,
-                height: 50.0,
-                color: Colors.green,
-                textColor: Colors.white,
-                onPressed: () async {
-                  // //aksi pindah
-                  // Navigator.push(context,
-                  //     MaterialPageRoute(builder: (context) => const Home()));
-                  Response _response;
-                  Dio _dio = Dio();
-                  // _response = await _dio.get(
-                  //   "https://103.2.146.173:8443/mobileservice/GetToken",
-                  //   // data: requestData,
-                  //   //data: {'win_token': 'wincore'},
-                  //   // options: Options(
-                  //   //   contentType: Headers.formUrlEncodedContentType,
-                  //   // ),
-                  // );
-
-                  _response = await _dio.request(
-                    'https://103.2.146.173:8443/mobileservice/GetToken',
-                    options: Options(
-                        method: 'GET', headers: {'win_token': 'wincore'}),
-                  );
-
-                  print(_response.data);
-
-                  TokenResponse tokenResponse =
-                      TokenResponse.fromJson(_response.data);
-                  print(tokenResponse.request_token);
-                },
-                child: const Text(
-                  'Kirim',
-                  style: TextStyle(fontSize: 30.0),
+      body: BlocProvider(
+        create: (context) => ChangesMpinCubit(),
+        child: BlocConsumer<ChangesMpinCubit, ChangesMpinState>(
+          listener: (context, state) {
+            if (state is MpinLoading) {
+              print("Now is loading");
+            } else if (state is MpinError) {
+              print(state.errorMsg);
+            } else if (state is ChangesMpinSuccessRestoreState) {
+              print(state.chagesMpinResponse);
+              if (state.chagesMpinResponse.status == "CHANGE_OK") {
+                showDialog(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                      title: const Text("Informasi"),
+                      content: const Text("MPIN kamu berhasil diperbarui !"),
+                      actions: <Widget>[
+                        ElevatedButton(
+                          child: const Text('OK'),
+                          onPressed: () {
+                            Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                    builder: (context) => Home(
+                                        username: widget.username,
+                                        no_rek: widget.noRek,
+                                        userid: widget.userid)));
+                          },
+                        ),
+                      ]),
+                );
+              }
+            }
+          },
+          builder: (context, state) {
+            return SafeArea(
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 24, horizontal: 32),
+                  child: Column(
+                    children: <Widget>[
+                      Container(
+                          margin: const EdgeInsets.all(10),
+                          child: TextField(
+                            style: const TextStyle(fontSize: 18.0),
+                            obscureText: true,
+                            controller: myOldMPINController,
+                            decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
+                              labelText: 'M-PIN Lama',
+                            ),
+                          )),
+                      Container(
+                          margin: const EdgeInsets.all(10),
+                          child: TextField(
+                            style: const TextStyle(fontSize: 18.0),
+                            obscureText: true,
+                            controller: myNewMPINController,
+                            decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
+                              labelText: 'M-PIN Baru',
+                            ),
+                          )),
+                      Container(
+                          margin: const EdgeInsets.all(10),
+                          child: TextField(
+                            style: const TextStyle(fontSize: 18.0),
+                            obscureText: true,
+                            controller: myReMPINController,
+                            decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
+                              labelText: 'Ketik Ulang Kata M-PIN Baru',
+                            ),
+                          )),
+                      const SizedBox(
+                        height: 25.0,
+                      ),
+                      Container(
+                        width: 100,
+                        margin: const EdgeInsets.only(top: 10),
+                        child: (ChangesMpinState is MpinLoading)
+                            ? _flatLoadingButton()
+                            : _flatLoginButton(context),
+                      ),
+                    ],
+                  ),
                 ),
-              )
-            ],
+              ),
+            );
+          },
+        ),
+      ),
+    );
+  }
+
+  ElevatedButton _flatLoginButton(BuildContext context) {
+    return ElevatedButton(
+      child: Padding(
+        padding: const EdgeInsets.all(3.0),
+        child: Text(
+          "Changes",
+          style: GoogleFonts.nunito(
+            textStyle: const TextStyle(
+              color: Colors.white,
+            ),
+          ),
+        ),
+      ),
+      onPressed: () async {
+        final mpinRequest = MpinRequest(
+          username: widget.userid,
+          oldpin: myOldMPINController.text,
+          newpin: myNewMPINController.text,
+        );
+
+        //print(widget.username);
+        //print(widget.noRek);
+        //print(widget.userid);
+        //print(widget.key);
+
+        context.read<ChangesMpinCubit>().changesMpin(mpinRequest);
+      },
+      style: ButtonStyle(
+        foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+        backgroundColor: MaterialStateProperty.all<Color>(Colors.purple),
+        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(24.0),
+          ),
+        ),
+      ),
+    );
+  }
+
+  ElevatedButton _flatLoadingButton() {
+    return ElevatedButton(
+      onPressed: null,
+      child: const Padding(
+        padding: EdgeInsets.all(3.0),
+        child: CircularProgressIndicator.adaptive(
+          strokeWidth: 2,
+        ),
+      ),
+      style: ButtonStyle(
+        foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+        backgroundColor: MaterialStateProperty.all<Color>(Colors.purple),
+        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(24.0),
           ),
         ),
       ),

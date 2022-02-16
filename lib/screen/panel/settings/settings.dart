@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:wincoremobile/screen/auth/change_mpin/change_mpin.dart';
-import 'package:wincoremobile/screen/auth/change_password/changes_password.dart';
+import 'package:wincoremobile/screen/auth/change_password/change_password.dart';
 import 'package:wincoremobile/screen/auth/forgot_mpin/forgot_mpin.dart';
 import 'package:wincoremobile/screen/auth/sign_in/sign_in.dart';
 import 'package:wincoremobile/helper/icon_with_label.dart';

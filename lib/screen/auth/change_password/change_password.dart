@@ -1,18 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:wincoremobile/domain/model/changePassword/changePass_request.dart';
+import 'package:wincoremobile/application/changePass/cubit/change_pass_cubit.dart';
+import 'package:wincoremobile/screen/panel/home/home.dart';
 
+// ignore: must_be_immutable
 class ChangePassword extends StatefulWidget {
-  const ChangePassword({Key? key}) : super(key: key);
+  ChangePassword({
+    Key? key,
+    required this.noRek,
+    required this.username,
+    required this.userid,
+  }) : super(key: key);
 
+  String noRek;
+  String username;
+  String userid;
   @override
   State<ChangePassword> createState() => _ChangePasswordState();
 }
 
 class _ChangePasswordState extends State<ChangePassword> {
-  late String nPhoneNumber,
-      nNewPassword,
-      nOldPassword,
-      nAccountNumber,
-      nRePassword;
+  bool _isObscure = true;
 
   final myPhoneNumberController = TextEditingController();
   final myAccountNumberController = TextEditingController();
@@ -20,109 +30,172 @@ class _ChangePasswordState extends State<ChangePassword> {
   final myNewPasswordController = TextEditingController();
   final myRePasswordController = TextEditingController();
 
-  //tambahkan form
-  final _formKey = GlobalKey<FormState>();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: const Text('Ubah Kata Sandi'),
+        title: const Text("Change Password"),
         backgroundColor: const Color(0xff120A7C),
       ),
-      body: SafeArea(
-        key: _formKey,
-        child: SingleChildScrollView(
-          child: Column(
-            children: <Widget>[
-              Container(
-                  margin: const EdgeInsets.all(10),
-                  child: TextField(
-                    style: const TextStyle(fontSize: 18.0),
-                    controller: myPhoneNumberController,
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Nomor Telepon',
-                    ),
-                    onChanged: (text) {
-                      nPhoneNumber = text;
-                    },
-                  )),
-              Container(
-                  margin: const EdgeInsets.all(10),
-                  child: TextField(
-                    style: const TextStyle(fontSize: 18.0),
-                    controller: myAccountNumberController,
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Nomor Telepon',
-                    ),
-                    onChanged: (text) {
-                      nAccountNumber = text;
-                    },
-                  )),
-              Container(
-                  margin: const EdgeInsets.all(10),
-                  child: TextField(
-                    style: const TextStyle(fontSize: 18.0),
-                    obscureText: true,
-                    controller: myOldPasswordController,
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Kata Sandi Lama',
-                    ),
-                    onChanged: (text) {
-                      nOldPassword = text;
-                    },
-                  )),
-              Container(
-                  margin: const EdgeInsets.all(10),
-                  child: TextField(
-                    style: const TextStyle(fontSize: 18.0),
-                    obscureText: true,
-                    controller: myNewPasswordController,
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Kata Sandi Baru',
-                    ),
-                    onChanged: (text) {
-                      nNewPassword = text;
-                    },
-                  )),
-              Container(
-                  margin: const EdgeInsets.all(10),
-                  child: TextField(
-                    style: const TextStyle(fontSize: 18.0),
-                    obscureText: true,
-                    controller: myRePasswordController,
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Ketik Ulang Kata Sandi Baru',
-                    ),
-                    onChanged: (text) {
-                      nRePassword = text;
-                    },
-                  )),
-              const SizedBox(
-                height: 25.0,
-              ),
-              MaterialButton(
-                minWidth: 180.0,
-                height: 50.0,
-                color: Colors.green,
-                textColor: Colors.white,
-                onPressed: () {
-                  // aksi pindah
-                  // Navigator.push(context,
-                  //     MaterialPageRoute(builder: (context) => Home(username: ,)));
-                },
-                child: const Text(
-                  'Kirim',
-                  style: TextStyle(fontSize: 30.0),
+      body: BlocProvider(
+        create: (context) => ChangesPassCubit(),
+        child: BlocConsumer<ChangesPassCubit, ChangesPassState>(
+          listener: (context, state) {
+            if (state is PassLoading) {
+              print("Now is loading");
+            } else if (state is PassError) {
+              print(state.errorMsg);
+            } else if (state is ChangesPassSuccessRestoreState) {
+              print(state.chagesPassResponse);
+              if (state.chagesPassResponse.status == "CHANGE_OK") {
+                showDialog(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                      title: const Text("Informasi"),
+                      content:
+                          const Text("Password kamu berhasil diperbarui !"),
+                      actions: <Widget>[
+                        ElevatedButton(
+                          child: const Text('OK'),
+                          onPressed: () {
+                            Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                    builder: (context) => Home(
+                                        username: widget.username,
+                                        no_rek: widget.noRek,
+                                        userid: widget.userid)));
+                          },
+                        ),
+                      ]),
+                );
+              }
+            }
+          },
+          builder: (context, state) {
+            return SafeArea(
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 24, horizontal: 32),
+                  child: Column(
+                    children: <Widget>[
+                      Container(
+                          margin: const EdgeInsets.all(10),
+                          child: TextField(
+                            style: const TextStyle(fontSize: 18.0),
+                            obscureText: true,
+                            controller: myOldPasswordController,
+                            decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
+                              labelText: 'Kata Sandi Lama',
+                            ),
+                            //onChanged: (text) {
+                            //nOldPassword = text;
+                            //},
+                          )),
+                      Container(
+                          margin: const EdgeInsets.all(10),
+                          child: TextField(
+                            style: const TextStyle(fontSize: 18.0),
+                            obscureText: true,
+                            controller: myNewPasswordController,
+                            decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
+                              labelText: 'Kata Sandi Baru',
+                            ),
+                            //onChanged: (text) {
+                            //nNewPassword = text;
+                            //},
+                          )),
+                      Container(
+                          margin: const EdgeInsets.all(10),
+                          child: TextField(
+                            style: const TextStyle(fontSize: 18.0),
+                            obscureText: true,
+                            controller: myRePasswordController,
+                            decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
+                              labelText: 'Ketik Ulang Kata Sandi Baru',
+                            ),
+                            //onChanged: (text) {
+                            //nRePassword = text;
+                            //},
+                          )),
+                      const SizedBox(
+                        height: 25.0,
+                      ),
+                      Container(
+                        width: 100,
+                        margin: const EdgeInsets.only(top: 10),
+                        child: (ChangesPassState is PassLoading)
+                            ? _flatLoadingButton()
+                            : _flatLoginButton(context),
+                      ),
+                    ],
+                  ),
                 ),
-              )
-            ],
+              ),
+            );
+          },
+        ),
+      ),
+    );
+  }
+
+  ElevatedButton _flatLoginButton(BuildContext context) {
+    return ElevatedButton(
+      child: Padding(
+        padding: const EdgeInsets.all(3.0),
+        child: Text(
+          "Changes",
+          style: GoogleFonts.nunito(
+            textStyle: const TextStyle(
+              color: Colors.white,
+            ),
+          ),
+        ),
+      ),
+      onPressed: () async {
+        final passRequest = PassRequest(
+          username: widget.userid,
+          oldpass: myOldPasswordController.text,
+          newpass: myNewPasswordController.text,
+        );
+
+        //print(widget.username);
+        //print(widget.noRek);
+        //print(widget.userid);
+        //print(widget.key);
+
+        context.read<ChangesPassCubit>().changesPass(passRequest);
+      },
+      style: ButtonStyle(
+        foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+        backgroundColor: MaterialStateProperty.all<Color>(Colors.purple),
+        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(24.0),
+          ),
+        ),
+      ),
+    );
+  }
+
+  ElevatedButton _flatLoadingButton() {
+    return ElevatedButton(
+      onPressed: null,
+      child: const Padding(
+        padding: EdgeInsets.all(3.0),
+        child: CircularProgressIndicator.adaptive(
+          strokeWidth: 2,
+        ),
+      ),
+      style: ButtonStyle(
+        foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+        backgroundColor: MaterialStateProperty.all<Color>(Colors.purple),
+        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(24.0),
           ),
         ),
       ),

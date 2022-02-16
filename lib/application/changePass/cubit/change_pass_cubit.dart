@@ -1,11 +1,11 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-import 'package:wincoremobile/domain/model/changesPassword/changesPass_request.dart';
-import 'package:wincoremobile/domain/model/changesPassword/changesPass_response.dart';
-import 'package:wincoremobile/repository/chagesPass/changesPass_repository.dart';
+import 'package:wincoremobile/domain/model/changePassword/changePass_request.dart';
+import 'package:wincoremobile/domain/model/changePassword/changePass_response.dart';
+import 'package:wincoremobile/repository/chagePass/changePass_repository.dart';
 import 'package:wincoremobile/repository/token_repository.dart';
 
-part 'changes_pass_state.dart';
+part 'change_pass_state.dart';
 
 class ChangesPassCubit extends Cubit<ChangesPassState> {
   ChangesPassCubit() : super(ChangesPassInitial());

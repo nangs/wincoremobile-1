@@ -4,8 +4,8 @@ import 'dart:convert';
 
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:wincoremobile/domain/model/changesPassword/changesPass_request.dart';
-import 'package:wincoremobile/domain/model/changesPassword/changesPass_response.dart';
+import 'package:wincoremobile/domain/model/changePassword/changePass_request.dart';
+import 'package:wincoremobile/domain/model/changePassword/changePass_response.dart';
 
 class PassRepository {
   final Dio _dio = Dio();
