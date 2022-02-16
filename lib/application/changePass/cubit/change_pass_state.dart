@@ -1,18 +1,18 @@
 part of 'change_pass_cubit.dart';
 
 @immutable
-abstract class ChangesPassState {}
+abstract class ChangePassState {}
 
-class ChangesPassInitial extends ChangesPassState {}
+class ChangePassInitial extends ChangePassState {}
 
-class PassLoading extends ChangesPassState {}
+class PassLoading extends ChangePassState {}
 
-class PassError extends ChangesPassState {
+class PassError extends ChangePassState {
   final String errorMsg;
   PassError(this.errorMsg);
 }
 
-class ChangesPassSuccessRestoreState extends ChangesPassState {
+class ChangePassSuccessRestoreState extends ChangePassState {
   final PassResponse chagesPassResponse;
-  ChangesPassSuccessRestoreState(this.chagesPassResponse);
+  ChangePassSuccessRestoreState(this.chagesPassResponse);
 }

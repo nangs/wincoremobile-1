@@ -11,7 +11,7 @@ class MpinRepository {
   final Dio _dio = Dio();
 
   // ignore: non_constant_identifier_names
-  Future<Either<String, MpinResponse>> ChangesMpinWithUsernameAndPassword({
+  Future<Either<String, MpinResponse>> changeNewMPIN({
     required String token,
     required MpinRequest mpinRequest,
   }) async {

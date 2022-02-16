@@ -11,7 +11,7 @@ class PassRepository {
   final Dio _dio = Dio();
 
   // ignore: non_constant_identifier_names
-  Future<Either<String, PassResponse>> ChangesPassWithUsernameAndPassword({
+  Future<Either<String, PassResponse>> changeNewPass({
     required String token,
     required PassRequest passRequest,
   }) async {

@@ -37,9 +37,10 @@ class _HomeState extends State<Home> {
       appBar: AppBar(
         backgroundColor: const Color(0xff120A7C),
         title: const Text(
-          "Wincore Mobile",
+          "WINCore Mobile",
           style: TextStyle(color: Colors.white),
         ),
+        centerTitle: true,
         actions: <Widget>[
           TextButton(
               onPressed: () {

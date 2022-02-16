@@ -36,14 +36,14 @@ class _ChangeMPINState extends State<ChangeMPIN> {
         backgroundColor: const Color(0xff120A7C),
       ),
       body: BlocProvider(
-        create: (context) => ChangesMpinCubit(),
-        child: BlocConsumer<ChangesMpinCubit, ChangesMpinState>(
+        create: (context) => ChangeMpinCubit(),
+        child: BlocConsumer<ChangeMpinCubit, ChangeMpinState>(
           listener: (context, state) {
             if (state is MpinLoading) {
               print("Now is loading");
             } else if (state is MpinError) {
               print(state.errorMsg);
-            } else if (state is ChangesMpinSuccessRestoreState) {
+            } else if (state is ChangeMpinSuccessRestoreState) {
               print(state.chagesMpinResponse);
               if (state.chagesMpinResponse.status == "CHANGE_OK") {
                 showDialog(
@@ -115,7 +115,7 @@ class _ChangeMPINState extends State<ChangeMPIN> {
                       Container(
                         width: 100,
                         margin: const EdgeInsets.only(top: 10),
-                        child: (ChangesMpinState is MpinLoading)
+                        child: (ChangeMpinState is MpinLoading)
                             ? _flatLoadingButton()
                             : _flatLoginButton(context),
                       ),
@@ -155,7 +155,7 @@ class _ChangeMPINState extends State<ChangeMPIN> {
         //print(widget.userid);
         //print(widget.key);
 
-        context.read<ChangesMpinCubit>().changesMpin(mpinRequest);
+        context.read<ChangeMpinCubit>().changeMpin(mpinRequest);
       },
       style: ButtonStyle(
         foregroundColor: MaterialStateProperty.all<Color>(Colors.white),

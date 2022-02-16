@@ -1,18 +1,18 @@
 part of 'change_mpin_cubit.dart';
 
 @immutable
-abstract class ChangesMpinState {}
+abstract class ChangeMpinState {}
 
-class ChangesMpinInitial extends ChangesMpinState {}
+class ChangeMpinInitial extends ChangeMpinState {}
 
-class MpinLoading extends ChangesMpinState {}
+class MpinLoading extends ChangeMpinState {}
 
-class MpinError extends ChangesMpinState {
+class MpinError extends ChangeMpinState {
   final String errorMsg;
   MpinError(this.errorMsg);
 }
 
-class ChangesMpinSuccessRestoreState extends ChangesMpinState {
+class ChangeMpinSuccessRestoreState extends ChangeMpinState {
   final MpinResponse chagesMpinResponse;
-  ChangesMpinSuccessRestoreState(this.chagesMpinResponse);
+  ChangeMpinSuccessRestoreState(this.chagesMpinResponse);
 }

@@ -38,14 +38,14 @@ class _ChangePasswordState extends State<ChangePassword> {
         backgroundColor: const Color(0xff120A7C),
       ),
       body: BlocProvider(
-        create: (context) => ChangesPassCubit(),
-        child: BlocConsumer<ChangesPassCubit, ChangesPassState>(
+        create: (context) => ChangePassCubit(),
+        child: BlocConsumer<ChangePassCubit, ChangePassState>(
           listener: (context, state) {
             if (state is PassLoading) {
               print("Now is loading");
             } else if (state is PassError) {
               print(state.errorMsg);
-            } else if (state is ChangesPassSuccessRestoreState) {
+            } else if (state is ChangePassSuccessRestoreState) {
               print(state.chagesPassResponse);
               if (state.chagesPassResponse.status == "CHANGE_OK") {
                 showDialog(
@@ -127,7 +127,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                       Container(
                         width: 100,
                         margin: const EdgeInsets.only(top: 10),
-                        child: (ChangesPassState is PassLoading)
+                        child: (ChangePassState is PassLoading)
                             ? _flatLoadingButton()
                             : _flatLoginButton(context),
                       ),
@@ -167,7 +167,7 @@ class _ChangePasswordState extends State<ChangePassword> {
         //print(widget.userid);
         //print(widget.key);
 
-        context.read<ChangesPassCubit>().changesPass(passRequest);
+        context.read<ChangePassCubit>().changePass(passRequest);
       },
       style: ButtonStyle(
         foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
