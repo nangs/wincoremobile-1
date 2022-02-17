@@ -566,8 +566,8 @@ Future<dynamic> M_PIN_AccActivitiesModalDialog(
                                       accountno: accountNo,
                                       username: userid,
                                       mpin: _MPINController.text,
-                                      enddate: endDate,
-                                      startdate: startDate,
+                                      enddate: endDate.replaceAll("/", ""),
+                                      startdate: startDate.replaceAll("/", ""),
                                       sequenceno: seqNo);
 
                               context

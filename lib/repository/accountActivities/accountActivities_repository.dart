@@ -32,9 +32,8 @@ class AccountActivitiesRepository {
 
       AccountActivitiesResponse accountActivitiesResponse =
           AccountActivitiesResponse.fromJson(_response.data);
-      Mutasi mutasi = Mutasi.fromJson(_response.data['mutasi']);
+
       print(accountActivitiesResponse);
-      print(mutasi);
 
       //right itu untuk sukses
       return right(accountActivitiesResponse);
