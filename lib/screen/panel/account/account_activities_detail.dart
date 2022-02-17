@@ -35,6 +35,8 @@ class _AccountActivitiesDetailsState extends State<AccountActivitiesDetails> {
     var responseInfo = widget.response.info;
 
     var mutasiList = responseInfo?.mutasi;
+    var eof = responseInfo?.eof;
+    var seqNo = responseInfo?.sequenceNo;
 
     return Scaffold(
       appBar: AppBar(
@@ -163,13 +165,19 @@ class _AccountActivitiesDetailsState extends State<AccountActivitiesDetails> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: ElevatedButton(
-                          onPressed: () {}, child: Text("Sebelumnya")),
+                      child: (eof == false && seqNo! > 1)
+                          ? ElevatedButton(
+                              onPressed: () {}, child: Text("Sebelumnya"))
+                          : ElevatedButton(
+                              onPressed: null, child: Text("Sebelumnya")),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: ElevatedButton(
-                          onPressed: () {}, child: Text("Selanjutnya")),
+                      child: (eof == true)
+                          ? ElevatedButton(
+                              onPressed: null, child: Text("Selanjutnya"))
+                          : ElevatedButton(
+                              onPressed: () {}, child: Text("Selanjutnya")),
                     ),
                   ],
                 )
@@ -287,16 +295,13 @@ class _accActivityDetailsState extends State<accActivityDetails> {
                         moneyFormat.format(
                             double.parse(widget.nilai_transaksi.toString())),
                     style: TextStyle(
-                      fontSize: 12,
-                    ),
+                        fontSize: 12,
+                        color: (widget.sign_transaksi == "D")
+                            ? Colors.red
+                            : Colors.blue),
                   ),
                   SizedBox(width: 8),
-                  Text(
-                    widget.sign_transaksi,
-                    style: TextStyle(
-                      fontSize: 12,
-                    ),
-                  )
+                  Text("")
                 ],
               ),
             )
