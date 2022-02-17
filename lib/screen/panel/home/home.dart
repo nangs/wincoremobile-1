@@ -200,11 +200,11 @@ class _HomeState extends State<Home> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: <Widget>[
-                                    const Icon(
-                                      Icons.attach_money,
-                                      size: 30,
+                                    Image.asset(
+                                      'assets/images/icons/ic-quickmenu-informasirekening@3x.png',
+                                      width: 40,
                                     ),
-                                    const SizedBox(height: 20),
+                                    const SizedBox(height: 8),
                                     const Text(
                                       "Informasi Saldo",
                                       textAlign: TextAlign.center,
